@@ -9,6 +9,36 @@
         .container { max-width: 600px; margin: auto; }
         .date-input { margin-bottom: 20px; }
     </style>
+
+<script>
+document.addEventListener("copy", function (event) {
+    let selection = window.getSelection();
+    if (!selection.rangeCount) return;
+
+    let div = document.createElement("div");
+    div.appendChild(selection.getRangeAt(0).cloneContents());
+
+    // Function to convert text to Unicode Bold
+    function toUnicodeBold(str) {
+        const normal = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        const bold = "𝗔𝗕𝗖𝗗𝗘𝗙𝗚𝗛𝗜𝗝𝗞𝗟𝗠𝗡𝗢𝗣𝗤𝗥𝗦𝗧𝗨𝗩𝗪𝗫𝗬𝗭𝗮𝗯𝗰𝗱𝗲𝗳𝗴𝗵𝗶𝗷𝗸𝗹𝗺𝗻𝗼𝗽𝗾𝗿𝘀𝘁𝘂𝘃𝘄𝘅𝘆𝘇𝟬𝟭𝟮𝟯𝟰𝟱𝟲𝟕𝟴𝟵";
+        
+        return str.split("").map(char => {
+            let index = normal.indexOf(char);
+            return index !== -1 ? bold[index] : char;
+        }).join("");
+    }
+
+    div.innerHTML = div.innerHTML.replace(/<b>(.*?)<\/b>|<strong>(.*?)<\/strong>/gi, (match, p1, p2) => {
+        return toUnicodeBold(p1 || p2);
+    });
+
+    event.clipboardData.setData("text/plain", div.textContent);
+    event.preventDefault();
+});
+</script>
+
+	
 </head>
 <body>
     <div class="container">
@@ -20,7 +50,7 @@
 
         <div id="content">
 		<p>
-            	📸 𝗧𝗢𝗗𝗔𝗬'𝗦 𝗙𝗟𝗜𝗖𝗞𝗘𝗥𝗦 (PUMITIK) <br>
+            	📸 <b>𝗧𝗢𝗗𝗔𝗬'𝗦 𝗙𝗟𝗜𝗖𝗞𝗘𝗥𝗦</b> (PUMITIK) <br>
            	🗓️ <span class="date">Saturday, March 8, 2025</span>
 			<br><br>
                 📸 Kalye Photo - Taktak <br>

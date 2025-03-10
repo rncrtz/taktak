@@ -6,7 +6,7 @@
     <title>Taktak Captions</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
-        .container { max-width: 600px; margin: auto; }
+        .container { display: flex; flex-direction: column; /* Stack items top to bottom */}
         .date-input { margin-bottom: 20px; }
 	    
         p {
@@ -59,13 +59,12 @@ document.addEventListener("copy", function (event) {
 </head>
 <body>
 	
-<div>
+<div class="container">
         <label for="dateInput">Change Date:</label>
         <input type="date" id="dateInput" class="date-input" onchange="updateDate()"><br>
 
         <label for="linkInput">Change Today's Flickers Link:</label>
         <input type="url" id="linkInput" class="link-input" placeholder="Enter new link" oninput="updateLink()">        
-</div>
 	
 <div class="copyDiv" onclick="copyText()">
 		<p>
@@ -129,6 +128,7 @@ document.addEventListener("copy", function (event) {
 		<br><br>
             	❤️ Send Appreciation - 09165039113
 		</p>
+</div>
 </div>
 
     <script>

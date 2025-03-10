@@ -101,7 +101,7 @@ document.addEventListener("copy", function (event) {
             	❤️ Send Appreciation - 09165039113
 		</p>
 </div>
-            <hr>
+            
             	<p>    
 			
 <div class="copyDiv" onclick="copyText()">	
@@ -113,12 +113,12 @@ document.addEventListener("copy", function (event) {
             	❤️ Send Appreciation - 09165039113
 		</p>
 </div>
-            <hr>
+            
 
 <div class="copyDiv" onclick="copyText()"><p>
             <span class="date">March 8, 2025</span> - Taktak Road, Antipolo City</p>
 </div>    
-            <hr>
+            
             	
 			
 <div class="copyDiv" onclick="copyText()"><p>
@@ -186,6 +186,34 @@ document.addEventListener("copy", function (event) {
                 }
             });
         });
+	    
+    </script>
+
+	    <script>
+        // Load saved data when page loads
+        window.onload = function () {
+            document.getElementById("textInput").value = localStorage.getItem("savedText") || "";
+            document.getElementById("dateInput").value = localStorage.getItem("savedDate") || "";
+        };
+
+        // Save text input whenever user types
+        document.getElementById("textInput").addEventListener("input", function () {
+            localStorage.setItem("savedText", this.value);
+        });
+
+        // Save date input whenever user selects a date
+        document.getElementById("dateInput").addEventListener("input", function () {
+            localStorage.setItem("savedDate", this.value);
+        });
+
+        // Clear saved data
+        function clearData() {
+            localStorage.removeItem("savedText");
+            localStorage.removeItem("savedDate");
+            document.getElementById("textInput").value = "";
+            document.getElementById("dateInput").value = "";
+            alert("Data cleared!");
+        }
     </script>
 	
 </body>

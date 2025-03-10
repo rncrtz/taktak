@@ -25,11 +25,10 @@
             margin-bottom: 10px;
         }
 
-	.copyDiv2 {
+	.Div {
             padding: 10px;
             border: 1px solid #ccc;
             display: inline-block;
-            background-color: #f9f9f9;
 	margin: auto;
             margin-bottom: 10px;
         }
@@ -69,10 +68,12 @@ document.addEventListener("copy", function (event) {
 <body>
 	
 <div class="container">
-<div class="copyDiv2">
+<div class="Div">
         <label for="dateInput">Change Date:</label>
-        <input type="date" id="dateInput" class="date-input" onchange="updateDate()"><br>
-
+        <input type="date" id="dateInput" class="date-input" onchange="updateDate()">
+</div>
+	<br>
+<div class="Div">
         <label for="linkInput">Change Today's Flickers Link:</label>
         <input type="url" id="linkInput" class="link-input" placeholder="Enter new link" oninput="updateLink()">
 </div>

@@ -15,12 +15,13 @@
             text-align: left;
         }
 
-	#copyDiv {
+        .copyDiv {
             padding: 10px;
             border: 1px solid #ccc;
             cursor: pointer;
             display: inline-block;
             background-color: #f9f9f9;
+            margin-bottom: 10px;
         }
 	    
     </style>
@@ -153,17 +154,18 @@ document.addEventListener("copy", function (event) {
         }
     </script>
 
-<script>
-        async function copyText() {
-            try {
-                var text = document.getElementById("copyDiv").innerText; // Gets text inside the div
-                await navigator.clipboard.writeText(text); // Copies text to clipboard
-                alert("Copied! Now try pasting (Ctrl + V)");
-            } catch (err) {
-                console.error("Failed to copy: ", err);
-                alert("Failed to copy. Try using HTTPS or a secure browser.");
-            }
-        }
+    <script>
+        document.querySelectorAll('.copyDiv').forEach(div => {
+            div.addEventListener('click', async function () {
+                try {
+                    await navigator.clipboard.writeText(this.innerText); // Copies clicked div's text
+                    alert("Copied: " + this.innerText);
+                } catch (err) {
+                    console.error("Failed to copy: ", err);
+                    alert("Failed to copy. Try using HTTPS or a secure browser.");
+                }
+            });
+        });
     </script>
 	
 </body>

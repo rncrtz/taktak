@@ -153,16 +153,15 @@ document.addEventListener("copy", function (event) {
         }
     </script>
 
-	<script>
+    <script>
         function copyText() {
-            var text = document.getElementById("copyDiv").innerText;
-            var tempInput = document.createElement("textarea");
-            tempInput.value = text;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            document.execCommand("copy");
-            document.body.removeChild(tempInput);
-            alert("Copied: " + text);
+            var text = document.getElementById("copyDiv").innerText; // Gets text inside the div
+
+            navigator.clipboard.writeText(text).then(function() {
+                alert("Copied: " + text);
+            }).catch(function(err) {
+                console.error("Failed to copy: ", err);
+            });
         }
     </script>
 	

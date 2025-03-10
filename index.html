@@ -14,6 +14,14 @@
             padding: 0;
             text-align: left;
         }
+
+	#copyDiv {
+            padding: 10px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            display: inline-block;
+            background-color: #f9f9f9;
+        }
 	    
     </style>
 
@@ -48,7 +56,7 @@ document.addEventListener("copy", function (event) {
 	
 </head>
 <body>
-    <div class="container">
+    <div id="copyDiv" class="container">
         <label for="dateInput">Change Date:</label>
         <input type="date" id="dateInput" class="date-input" onchange="updateDate()"><br>
 
@@ -138,5 +146,19 @@ document.addEventListener("copy", function (event) {
            	 }
         }
     </script>
+
+	<script>
+        function copyText() {
+            var text = document.getElementById("copyDiv").innerText;
+            var tempInput = document.createElement("textarea");
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+            alert("Copied: " + text);
+        }
+    </script>
+	
 </body>
 </html>

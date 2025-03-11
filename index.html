@@ -80,7 +80,7 @@ document.addEventListener("copy", function (event) {
 	<br>
 <div class="Div">
         <label for="albumInput">End of album:</label>
-        <input id="albumInput" class="album-input" placeholder="0" oninput="">
+        <input id="albumInput" class="album-input" placeholder="1" oninput="">
 </div>
 	
 <div class="copyDiv" onclick="copyText()">
@@ -152,7 +152,7 @@ document.addEventListener("copy", function (event) {
 </div>
 </div>
 
-    <script>
+<script>
 document.addEventListener("DOMContentLoaded", function () {
     // Load saved values on page load
     const savedDate = localStorage.getItem("savedDate");
@@ -208,35 +208,14 @@ function updateLink() {
                 }
             });
         });
-	    
-    </script>
+</script>
 
-	    <script>
-        // Load saved data when page loads
-        window.onload = function () {
-            document.getElementById("textInput").value = localStorage.getItem("savedText") || "";
-            document.getElementById("dateInput").value = localStorage.getItem("savedDate") || "";
-        };
-
-        // Save text input whenever user types
-        document.getElementById("textInput").addEventListener("input", function () {
-            localStorage.setItem("savedText", this.value);
-        });
-
-        // Save date input whenever user selects a date
-        document.getElementById("dateInput").addEventListener("input", function () {
-            localStorage.setItem("savedDate", this.value);
-        });
-
-        // Clear saved data
-        function clearData() {
-            localStorage.removeItem("savedText");
-            localStorage.removeItem("savedDate");
-            document.getElementById("textInput").value = "";
-            document.getElementById("dateInput").value = "";
-            alert("Data cleared!");
-        }
-    </script>
+<script> // UPDATE ALBUM NUMBER SCRIPT
+    function updateAlbum() {
+        let input = document.getElementById("albumInput").value;
+        document.getElementById("album").textContent = input || "1"; // Default to "1" if input is empty
+    }
+</script>
 	
 </body>
 </html>

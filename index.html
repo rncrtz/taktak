@@ -153,28 +153,50 @@ document.addEventListener("copy", function (event) {
 </div>
 
     <script>
-        function updateDate() {
-            const dateInput = document.getElementById("dateInput").value;
-            if (dateInput) {
-                const date = new Date(dateInput);
-                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-                const formattedDate = date.toLocaleDateString('en-US', options);
-                
-                document.querySelectorAll(".date").forEach(el => {
-                    el.textContent = formattedDate;
-                });
-            }
-        }
+document.addEventListener("DOMContentLoaded", function () {
+    // Load saved values on page load
+    const savedDate = localStorage.getItem("savedDate");
+    const savedLink = localStorage.getItem("savedLink");
 
-	     function updateLink() {
-            				const linkInput = document.getElementById("linkInput").value;
-            				const linkElement = document.getElementById("flickersLink");
-            				if (linkInput) {
-               				 linkElement.href = linkInput;
-               				 linkElement.textContent = linkInput;
-           	 }
-        }
+    if (savedDate) {
+        document.getElementById("dateInput").value = savedDate;
+        updateDate(); // Update displayed date
+    }
 
+    if (savedLink) {
+        document.getElementById("linkInput").value = savedLink;
+        updateLink(); // Update the link
+    }
+});
+
+function updateDate() {
+    const dateInput = document.getElementById("dateInput").value;
+    if (dateInput) {
+        localStorage.setItem("savedDate", dateInput); // Save to local storage
+
+        const date = new Date(dateInput);
+        const options = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
+        const formattedDate = date.toLocaleDateString("en-US", options);
+
+        document.querySelectorAll(".date").forEach(el => {
+            el.textContent = formattedDate;
+        });
+    }
+}
+
+function updateLink() {
+    const linkInput = document.getElementById("linkInput").value;
+    localStorage.setItem("savedLink", linkInput); // Save to local storage
+
+    const linkElement = document.getElementById("flickersLink");
+    if (linkInput) {
+        linkElement.href = linkInput;
+        linkElement.textContent = linkInput;
+    }
+}
+
+// NEW SCRIPT
+	    
         document.querySelectorAll('.copyDiv').forEach(div => {
             div.addEventListener('click', async function () {
                 try {

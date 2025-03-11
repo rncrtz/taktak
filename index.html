@@ -195,6 +195,11 @@ function updateLink() {
     }
 }
 
+function updateAlbum() {
+	let input = document.getElementById("albumInput").value;
+	document.getElementById("album").textContent = input || "1"; // Default to "1" if input is empty
+    }
+
 // NEW SCRIPT
 	    
         document.querySelectorAll('.copyDiv').forEach(div => {
@@ -208,13 +213,6 @@ function updateLink() {
                 }
             });
         });
-</script>
-
-<script> // UPDATE ALBUM NUMBER SCRIPT
-    function updateAlbum() {
-        let input = document.getElementById("albumInput").value;
-        document.getElementById("album").textContent = input || "1"; // Default to "1" if input is empty
-    }
 </script>
 	
 </body>

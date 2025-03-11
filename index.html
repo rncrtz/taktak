@@ -214,6 +214,27 @@ function updateAlbum() {
             });
         });
 </script>
+
+<script>
+        // Function to update the album number and save it to localStorage
+        function updateAlbum() {
+            let input = document.getElementById("albumInput").value;
+            document.getElementById("album").textContent = input || "1"; // Default to "1" if input is empty
+            localStorage.setItem("albumNumber", input); // Save to localStorage
+        }
+
+        // Function to load saved album number when page loads
+        function loadAlbum() {
+            let savedAlbum = localStorage.getItem("albumNumber");
+            if (savedAlbum !== null) {
+                document.getElementById("albumInput").value = savedAlbum;
+                document.getElementById("album").textContent = savedAlbum;
+            }
+        }
+
+        // Load saved album number on page load
+        window.onload = loadAlbum;
+</script>
 	
 </body>
 </html>

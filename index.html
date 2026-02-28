@@ -71,30 +71,35 @@ document.addEventListener("copy", function (event) {
 <body>
 	
 <div class="container">
-// CHANGE DATE DIV
+	
+<!-- CHANGE DATE SECTION -->
 <div class="Div">
         <label for="dateInput">Change Date:</label>
         <input type="date" id="dateInput" class="date-input" onchange="updateDate()">
 </div>
 	
-// FLICKERS LINK DIV
+<!-- FLICKERS LINK SECTION -->
 <div class="Div">
         <label for="linkInput">Flickers Link:</label>
         <input type="url" id="linkInput" class="link-input" placeholder="Enter new link" oninput="updateLink()">
 </div>
-
-<div class="Div"><b>𝟭𝟮𝟯𝟰𝟱𝟲𝟳𝟴𝟵𝟬</b></div>
 	
+<!-- NUMBERS SECTION -->
+<div class="Div"><b>𝟭𝟮𝟯𝟰𝟱𝟲𝟳𝟴𝟵𝟬</b></div>
+
+<!-- BACTH NUMBER SECTION -->	
 <div class="Div">
     <label for="batchInput">Batch Number:</label>
     <input id="batchInput" class="album-input" placeholder="0" oninput="updateBatch()">
 </div>
 
+<!-- END OF ALBUM SECTION -->
 <div class="Div">
     <label for="albumInput">End of album:</label>
     <input id="albumInput" class="album-input" placeholder="0" oninput="updateAlbum()">
 </div>
-	
+
+<!-- TODAY'S FLICKERS SECTION -->	
 <div class="copyDiv" onclick="copyText()">
 		<p>
             	📸 <b>𝗧𝗢𝗗𝗔𝗬'𝗦 𝗙𝗟𝗜𝗖𝗞𝗘𝗥𝗦</b> (PUMITIK) <br>
@@ -115,7 +120,8 @@ document.addEventListener("copy", function (event) {
 </div>
             
             	<p>    
-			
+					
+<!-- INFRAME SECTION -->			
 <div class="copyDiv" onclick="copyText()">	
 		📷 <b>𝗜𝗡𝗙𝗥𝗔𝗠𝗘 :</b> (Tag 'em) 
 			<br><br>
@@ -125,16 +131,17 @@ document.addEventListener("copy", function (event) {
 		</p>
 </div>
             
-
+<!-- ALBUM TITLE SECTION -->
 <div class="copyDiv" onclick="copyText()"><p>
-            <span class="date">March 8, 2025</span> - Taktak Road, Antipolo City</p>
+            <span class="date">Date-Day-Year</span> - Taktak Road, Antipolo City</p>
 </div>    
-            
+
+<!-- DESCRIPTION SECTION -->
 <div class="copyDiv" onclick="copyText()"><p>
             Thank you so much for your support! I truly appreciate it. If you haven’t yet, please feel free to like and follow my page to stay updated—it really means a lot. Also, feel free to share any of the photos! If you'd like to show some extra support, you can send a little something via GCash at 09165039113. Thank you again! 🙏😊</p>
 </div>             	
 
-
+<!-- POST SECTION -->
 <div class="copyDiv" onclick="copyText()"><p>
 		📷 <b>𝗧𝗮𝗸𝘁𝗮𝗸 𝗥𝗼𝗮𝗱, 𝗔𝗻𝘁𝗶𝗽𝗼𝗹𝗼 𝗖𝗶𝘁𝘆</b><br>
             	🖼️ <b>𝗕𝗮𝘁𝗰𝗵 </b><span id="batchNumber">12345678901</span> <b>𝗼𝗳 </b><span id="album" class="album-input">𝟭</span> (Tap the album to view all)<br>
@@ -273,6 +280,7 @@ function loadBatch() {
 	
 </body>
 </html>
+
 
 
 

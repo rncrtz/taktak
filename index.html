@@ -82,6 +82,11 @@ document.addEventListener("copy", function (event) {
 </div>
 	<br>
 <div class="Div">
+    <label for="batchInput">Batch Number:</label>
+    <input id="batchInput" class="album-input" placeholder="12345678901" oninput="updateBatch()">
+</div>
+	<br>
+<div class="Div">
     <label for="albumInput">End of album:</label>
     <input id="albumInput" class="album-input" placeholder="0" oninput="updateAlbum()"><b>𝟭𝟮𝟯𝟰𝟱𝟲𝟳𝟴𝟵𝟬</b>
 </div>
@@ -128,7 +133,7 @@ document.addEventListener("copy", function (event) {
 
 <div class="copyDiv" onclick="copyText()"><p>
 		📷 <b>𝗧𝗮𝗸𝘁𝗮𝗸 𝗥𝗼𝗮𝗱, 𝗔𝗻𝘁𝗶𝗽𝗼𝗹𝗼 𝗖𝗶𝘁𝘆</b><br>
-            	🖼️ <b>𝗕𝗮𝘁𝗰𝗵 𝟭𝟮𝟯𝟰𝟱𝟲𝟳𝟴𝟵𝟬𝟭 𝗼𝗳 </b><span id="album" class="album-input">𝟭</span> (Tap the album to view all)<br>
+            	🖼️ <b>𝗕𝗮𝘁𝗰𝗵 </b><span id="batchNumber">12345678901</span> <b>𝗼𝗳 </b><span id="album" class="album-input">𝟭</span> (Tap the album to view all)<br>
             	🗓️ <b>𝗗𝗮𝘁𝗲: </b> <span class="date"> Saturday, March 8, 2025</span><br>
             	---<br>
 		🤝 Special Thanks To:<br>
@@ -240,12 +245,31 @@ function updateAlbum() {
             }
         }
 
+function updateBatch() {
+    let input = document.getElementById("batchInput").value;
+    document.getElementById("batchNumber").textContent = input || "12345678901";
+    localStorage.setItem("batchNumber", input);
+}
+
+// Load saved batch number
+function loadBatch() {
+    let savedBatch = localStorage.getItem("batchNumber");
+    if (savedBatch !== null) {
+        document.getElementById("batchInput").value = savedBatch;
+        document.getElementById("batchNumber").textContent = savedBatch;
+    }
+}
+	
         // Load saved album number on page load
-        window.onload = loadAlbum;
+        window.onload = function() {
+    loadAlbum();
+    loadBatch();
+};
 </script>
 	
 </body>
 </html>
+
 
 
 

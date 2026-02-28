@@ -133,7 +133,7 @@ document.addEventListener("copy", function (event) {
             
 <!-- ALBUM TITLE SECTION -->
 <div class="copyDiv" onclick="copyText()"><p>
-            <span class="date">Date-Day-Year</span> - Taktak Road, Antipolo City</p>
+            <span class="album-date">Month-Day-Year</span> - Taktak Road, Antipolo City</p>
 </div>    
 
 <!-- DESCRIPTION SECTION -->
@@ -196,14 +196,36 @@ document.addEventListener("DOMContentLoaded", function () {
 function updateDate() {
     const dateInput = document.getElementById("dateInput").value;
     if (dateInput) {
-        localStorage.setItem("savedDate", dateInput); // Save to local storage
+        localStorage.setItem("savedDate", dateInput);
 
         const date = new Date(dateInput);
-        const options = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
-        const formattedDate = date.toLocaleDateString("en-US", options);
 
+        // Full format (with weekday)
+        const fullOptions = { 
+            weekday: "long", 
+            year: "numeric", 
+            month: "long", 
+            day: "numeric" 
+        };
+
+        // Album format (NO weekday)
+        const albumOptions = { 
+            year: "numeric", 
+            month: "long", 
+            day: "numeric" 
+        };
+
+        const fullFormatted = date.toLocaleDateString("en-US", fullOptions);
+        const albumFormatted = date.toLocaleDateString("en-US", albumOptions);
+
+        // Update normal date sections
         document.querySelectorAll(".date").forEach(el => {
-            el.textContent = formattedDate;
+            el.textContent = fullFormatted;
+        });
+
+        // Update album title date only
+        document.querySelectorAll(".album-date").forEach(el => {
+            el.textContent = albumFormatted;
         });
     }
 }
@@ -280,6 +302,7 @@ function loadBatch() {
 	
 </body>
 </html>
+
 
 
 

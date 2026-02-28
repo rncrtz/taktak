@@ -41,10 +41,16 @@
 	.Div {
         display: inline-block;
 		margin: auto;
-		border-radius: 15px; /* Adjust the roundness */
-    	border: 1px solid #ccc; /* Optional border */
+		border-radius: 10px; /* Adjust the roundness */
     	padding: 10px; /* Space inside */
 		margin-bottom: 10px;
+
+		/* Glass Effect */
+		background: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+		border: 1px solid rgba(255, 255, 255, 0.3); /* Soft border */
+		backdrop-filter: blur(10px); /* The frosted glass blur */
+		-webkit-backdrop-filter: blur(10px);   /* Safari support */
+		box-shadow: 0 4px 30px rgba(0,0,0,0.1); /* Optional soft shadow */
         }
 	    
 	.album-input {
@@ -327,6 +333,7 @@ function loadBatch() {
 	
 </body>
 </html>
+
 
 
 

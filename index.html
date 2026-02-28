@@ -19,8 +19,6 @@
 		
         .container { display: flex; flex-direction: column; /* Stack items top to bottom */}
         .date-input { margin-bottom: 20px; }
-
-
 		
         p {
             margin: 0;
@@ -29,43 +27,40 @@
         }
 
         .copyDiv {
-            padding: 10px;
-            border: 1px solid #ccc;
             cursor: pointer;
             display: inline-block;
-            background-color: #f9f9f9;
 			margin: auto;
             margin-bottom: 10px;
         }
 
-	.Div {
-        display: inline-block;
-		margin: auto;
-		border-radius: 10px; /* Adjust the roundness */
-    	padding: 10px; /* Space inside */
-		margin-bottom: 10px;
+		.Div {
+        	display: inline-block;
+			margin: auto;
+			border-radius: 10px; /* Adjust the roundness */
+    		padding: 10px; /* Space inside */
+			margin-bottom: 10px;
 
-		/* Glass Effect */
-		background: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
-		border: 1px solid rgba(255, 255, 255, 0.3); /* Soft border */
-		backdrop-filter: blur(10px); /* The frosted glass blur */
-		-webkit-backdrop-filter: blur(10px);   /* Safari support */
-		box-shadow: 0 4px 30px rgba(0,0,0,0.1); /* Optional soft shadow */
+			/* Glass Effect */
+			background: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+			border: 1px solid rgba(255, 255, 255, 0.3); /* Soft border */
+			backdrop-filter: blur(10px); /* The frosted glass blur */
+			-webkit-backdrop-filter: blur(10px);   /* Safari support */
+			box-shadow: 0 4px 30px rgba(0,0,0,0.1); /* Optional soft shadow */
         }
 	    
-	.album-input {
+		.album-input {
     		font-weight: bold;
-	}
+		}
 
-	.glass-div {
-    	background: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
-    	border-radius: 10px;                   /* Rounded corners */
-   	 	border: 1px solid rgba(255, 255, 255, 0.3); /* Soft border */
-    	backdrop-filter: blur(10px);           /* The frosted glass blur */
-    	-webkit-backdrop-filter: blur(10px);   /* Safari support */
-    	padding: 20px;                         /* Inner spacing */
-    	box-shadow: 0 4px 30px rgba(0,0,0,0.1); /* Optional soft shadow */
-	}
+		.glass-div {
+    		background: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+    		border-radius: 10px;                   /* Rounded corners */
+   	 		border: 1px solid rgba(255, 255, 255, 0.3); /* Soft border */
+    		backdrop-filter: blur(10px);           /* The frosted glass blur */
+    		-webkit-backdrop-filter: blur(10px);   /* Safari support */
+    		padding: 10px;                         /* Inner spacing */
+    		box-shadow: 0 4px 30px rgba(0,0,0,0.1); /* Optional soft shadow */
+		}
 		
     </style>
 
@@ -131,7 +126,7 @@ document.addEventListener("copy", function (event) {
 </div>
 
 <!-- TODAY'S FLICKERS SECTION -->	
-<div class="copyDiv glass-Div" onclick="copyText()">
+<div class="copyDiv glass-div" onclick="copyText()">
 		<p>
             	📸 <b>𝗧𝗢𝗗𝗔𝗬'𝗦 𝗙𝗟𝗜𝗖𝗞𝗘𝗥𝗦</b> (PUMITIK) <br>
            	🗓️ <span class="date">Saturday, March 8, 2025</span>
@@ -333,6 +328,7 @@ function loadBatch() {
 	
 </body>
 </html>
+
 
 
 

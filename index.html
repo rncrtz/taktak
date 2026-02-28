@@ -71,13 +71,15 @@ document.addEventListener("copy", function (event) {
 <body>
 	
 <div class="container">
+// CHANGE DATE DIV
 <div class="Div">
         <label for="dateInput">Change Date:</label>
         <input type="date" id="dateInput" class="date-input" onchange="updateDate()">
 </div>
-	<br>
+	
+// FLICKERS LINK DIV
 <div class="Div">
-        <label for="linkInput">Change Today's Flickers Link:</label>
+        <label for="linkInput">Flickers Link:</label>
         <input type="url" id="linkInput" class="link-input" placeholder="Enter new link" oninput="updateLink()">
 </div>
 
@@ -271,6 +273,7 @@ function loadBatch() {
 	
 </body>
 </html>
+
 
 
 

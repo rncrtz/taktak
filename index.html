@@ -6,18 +6,25 @@
     <title>Taktak Captions</title>
     <style>
         body { 
-		/* Font Styles */
-		font-family: Arial, sans-serif; margin: 20px;
+			/* Font Styles */
+			font-family: Arial, sans-serif; margin: 20px;
 			
-		/* Background Image */
-    	background-image: url("https://images.pexels.com/photos/56011/rush-meadow-ornamental-grass-spring-56011.jpeg");
-   		background-repeat: no-repeat;
- 	   	background-size: cover;
-  	 	background-position: center center;
-		background-attachment: fixed;
+			/* Background Image */
+    		background-image: url("https://images.pexels.com/photos/56011/rush-meadow-ornamental-grass-spring-56011.jpeg");
+   			background-repeat: no-repeat;
+ 	   		background-size: cover;
+  	 		background-position: center center;
+			background-attachment: fixed;
 		}
 		
-        .container { display: flex; flex-direction: column; /* Stack items top to bottom */}
+        .container { 
+		/* 	display: flex; flex-direction: column; Stack items top to bottom  */
+
+   	 		display: grid;
+    		grid-template-columns: repeat(2, 1fr); /* 2 columns of equal width */
+    		gap: 20px; /* space between divs */
+		}
+		
         .date-input { margin-bottom: 20px; }
 		
         p {
@@ -328,6 +335,7 @@ function loadBatch() {
 	
 </body>
 </html>
+
 
 
 

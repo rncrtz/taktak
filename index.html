@@ -36,6 +36,10 @@
 	.album-input {
     		font-weight: bold;
 	}
+		
+	.album2-input {
+    		font-weight: bold;
+	}
     </style>
 
 <script>
@@ -82,6 +86,8 @@ document.addEventListener("copy", function (event) {
 </div>
 	<br>
 <div class="Div">
+	<label for="album2Input">Album Numbers:</label>
+    <input id="album2Input" class="album2-input" placeholder="0" oninput="updateAlbum2()"><br>
     <label for="albumInput">End of album:</label>
     <input id="albumInput" class="album-input" placeholder="0" oninput="updateAlbum()"><b>𝟭𝟮𝟯𝟰𝟱𝟲𝟳𝟴𝟵𝟬</b>
 </div>
@@ -128,7 +134,7 @@ document.addEventListener("copy", function (event) {
 
 <div class="copyDiv" onclick="copyText()"><p>
 		📷 <b>𝗧𝗮𝗸𝘁𝗮𝗸 𝗥𝗼𝗮𝗱, 𝗔𝗻𝘁𝗶𝗽𝗼𝗹𝗼 𝗖𝗶𝘁𝘆</b><br>
-            	🖼️ <b>𝗕𝗮𝘁𝗰𝗵 𝟭𝟮𝟯𝟰𝟱𝟲𝟳𝟴𝟵𝟬𝟭 𝗼𝗳 </b><span id="album" class="album-input">𝟭</span> (Tap the album to view all)<br>
+            	🖼️ <b>𝗕𝗮𝘁𝗰𝗵 <span id="album2" class="album2-input">𝟬</span> 𝗼𝗳 </b><span id="album" class="album-input">𝟭</span> (Tap the album to view all)<br>
             	🗓️ <b>𝗗𝗮𝘁𝗲: </b> <span class="date"> Saturday, March 8, 2025</span><br>
             	---<br>
 		🤝 Special Thanks To:<br>
@@ -208,6 +214,13 @@ function updateAlbum() {
 	document.getElementById("album").textContent = input || "1"; // Default to "1" if input is empty
     }
 
+}
+
+function updateAlbum2() {
+	let input = document.getElementById("album2Input").value;
+	document.getElementById("album2").textContent = input || "0"; // Default to "0" if input is empty
+    }
+
 // NEW SCRIPT
 	    
         document.querySelectorAll('.copyDiv').forEach(div => {
@@ -230,7 +243,7 @@ function updateAlbum() {
             document.getElementById("album").textContent = input || "1"; // Default to "1" if input is empty
             localStorage.setItem("albumNumber", input); // Save to localStorage
         }
-
+	
         // Function to load saved album number when page loads
         function loadAlbum() {
             let savedAlbum = localStorage.getItem("albumNumber");
@@ -243,9 +256,32 @@ function updateAlbum() {
         // Load saved album number on page load
         window.onload = loadAlbum;
 </script>
+
+<script>
+	    // Function to update the album2 number and save it to localStorage
+        function updateAlbum2() {
+            let input = document.getElementById("album2Input").value;
+            document.getElementById("album2").textContent = input || "0"; // Default to "0" if input is empty
+            localStorage.setItem("album2Number", input); // Save to localStorage
+        }
+	
+        // Function to load saved album number when page loads
+        function loadAlbum2() {
+            let savedAlbum2 = localStorage.getItem("album2Number");
+            if (savedAlbum2 !== null) {
+                document.getElementById("album2Input").value = savedAlbum2;
+                document.getElementById("album2").textContent = savedAlbum2;
+            }
+        }
+
+        // Load saved album2 number on page load
+        window.onload = loadAlbum2;
+</script>
+
 	
 </body>
 </html>
+
 
 
 

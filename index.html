@@ -64,6 +64,17 @@
     		padding: 10px;                         /* Inner spacing */
     		box-shadow: 0 4px 30px rgba(0,0,0,0.1); /* Optional soft shadow */
 		}
+
+		.spotify-floating {
+    	position: fixed;           /* Stick to screen */
+    	bottom: 20px;              /* 20px from bottom */
+    	right: 20px;               /* 20px from right */
+    	width: 300px;              /* Set your desired width */
+    	height: 80px;              /* Spotify mini player height */
+    	border-radius: 12px;       /* Rounded corners */
+    	box-shadow: 0 4px 15px rgba(0,0,0,0.3);  /* Optional shadow */
+    	z-index: 9999;             /* Always on top */
+		}
 		
     </style>
 
@@ -100,7 +111,15 @@ document.addEventListener("copy", function (event) {
 <body>
 	
 <!-- SPOTIFY MUSIC PLAYER -->
-<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1EIXAh8lFyqNmg?utm_source=generator&theme=0" width="50%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+<iframe class="spotify-floating" 
+        data-testid="embed-iframe" 
+        style="border-radius:12px" 
+        src="https://open.spotify.com/embed/playlist/37i9dQZF1EIXAh8lFyqNmg?utm_source=generator&theme=0" 
+        width="75%" height="152" frameBorder="0" 
+        allowfullscreen="" 
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+        loading="lazy">
+</iframe>
 	
 <div class="container">
 	
@@ -334,6 +353,7 @@ function loadBatch() {
 	
 </body>
 </html>
+
 
 
 

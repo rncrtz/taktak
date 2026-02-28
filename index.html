@@ -78,8 +78,9 @@
 
 		.Div:hover,
 		.copyDiv:hover {
-    		transform: scale(1.05); /* Slightly bigger */
-    		transition: transform 0.3s ease; /* Smooth scaling */
+    		backdrop-filter: blur(15px); /* More blur on hover */
+    		box-shadow: 0 10px 30px rgba(0,0,0,0.4); /* Deeper shadow */
+    		transition: all 0.3s ease;
 		}
 		
     </style>
@@ -359,6 +360,7 @@ function loadBatch() {
 	
 </body>
 </html>
+
 
 
 

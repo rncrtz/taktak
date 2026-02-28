@@ -49,6 +49,24 @@
 	.album-input {
     		font-weight: bold;
 	}
+
+
+	.rounded-div {
+    	border-radius: 15px; /* Adjust the roundness */
+    	border: 1px solid #ccc; /* Optional border */
+    	padding: 10px; /* Space inside */
+	}
+
+	.glass-div {
+    	background: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+    	border-radius: 15px;                   /* Rounded corners */
+   	 	border: 1px solid rgba(255, 255, 255, 0.3); /* Soft border */
+    	backdrop-filter: blur(10px);           /* The frosted glass blur */
+    	-webkit-backdrop-filter: blur(10px);   /* Safari support */
+    	padding: 20px;                         /* Inner spacing */
+    	box-shadow: 0 4px 30px rgba(0,0,0,0.1); /* Optional soft shadow */
+	}
+		
     </style>
 
 <script>
@@ -86,7 +104,7 @@ document.addEventListener("copy", function (event) {
 <div class="container">
 	
 <!-- CHANGE DATE SECTION -->
-<div class="Div">
+<div class="Div glass-div">
         <label for="dateInput">Change Date:</label>
         <input type="date" id="dateInput" class="date-input" onchange="updateDate()">
 </div>
@@ -315,6 +333,7 @@ function loadBatch() {
 	
 </body>
 </html>
+
 
 
 

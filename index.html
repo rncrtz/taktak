@@ -206,9 +206,11 @@ document.addEventListener("copy", function (event) {
             	🗓️ <b>𝗗𝗮𝘁𝗲: </b> <span class="date"> Saturday, March 8, 2025</span><br>
             	---<br>
 		🤝 Special Thanks To:<br>
-		⭐ @Bigote.Cafe<br><br>
-
-            	📣 Promote With Us:<br>
+		<div id="specialThanksList">
+		⭐ @Bigote.Cafe<br>
+		</div>	
+		<br>
+        📣 Promote With Us:<br>
 		Advertise your biz through my photos.<br>
 		📩 DM for rates and inquiries.<br>
             	---<br>
@@ -231,10 +233,27 @@ document.addEventListener("copy", function (event) {
 		❤️ Send Your Appreciation: 0916-503-9113
 		</p>
 </div>			
+
+<!-- SPECIAL THANKS EDITOR -->
+<div class="Div">
+    <label for="thanksInput">Special Thanks To (separate with comma):</label><br>
+    <input type="text" id="thanksInput" 
+           placeholder="@Bigote.Cafe,@AnotherPage"
+           oninput="updateSpecialThanks()"
+           style="width:100%; padding:5px;">
+</div>
 	
 </div>
 
 <script>
+
+// WINDOW LOAD
+window.onload = function() {
+    loadAlbum();
+    loadBatch();
+	loadSpecialThanks();
+};
+	
 document.addEventListener("DOMContentLoaded", function () {
     // Load saved values on page load
     const savedDate = localStorage.getItem("savedDate");
@@ -351,15 +370,41 @@ function loadBatch() {
     }
 }
 	
-        // Load saved album number on page load
-        window.onload = function() {
-    loadAlbum();
-    loadBatch();
-};
+// SPECIAL THANKS LIST SCRIPT
+function updateSpecialThanks() {
+    let input = document.getElementById("thanksInput").value;
+
+    localStorage.setItem("specialThanks", input);
+
+    let container = document.getElementById("specialThanksList");
+
+    if (input.trim() === "") {
+        container.innerHTML = "";
+        return;
+    }
+
+    let names = input.split(",");
+    container.innerHTML = "";
+
+    names.forEach(name => {
+        container.innerHTML += "⭐ " + name.trim() + "<br>";
+    });
+}
+
+// Load saved Special Thanks
+function loadSpecialThanks() {
+    let saved = localStorage.getItem("specialThanks");
+    if (saved !== null) {
+        document.getElementById("thanksInput").value = saved;
+        updateSpecialThanks();
+    }
+}
+	
 </script>
 	
 </body>
 </html>
+
 
 
 

@@ -312,14 +312,15 @@ function toUnicodeBold(str) {
     }).join("");
 }
 
+// Instead of converting to Unicode, just update text
 document.getElementById("batchInput").addEventListener("input", function() {
-    let boldText = toUnicodeBold(this.value || "12345678901");
-    document.getElementById("batchNumber").textContent = boldText;
-    localStorage.setItem("batchNumber", this.value); // still save normal value
-});   
+    document.getElementById("batchNumber").textContent = this.value || "12345678901";
+    document.getElementById("batchNumber").style.fontWeight = "bold";
+});    
 </script>
 </body>
 </html>
+
 
 
 

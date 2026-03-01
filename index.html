@@ -182,17 +182,17 @@ p {
     <!-- BATCH & ALBUM -->
     <section class="glass">
         <label for="batchInput">Batch Number:</label>
-        <input id="batchInput" placeholder="0" oninput="updateBatch()">
+        <input id="myInput" placeholder="0" oninput="updateBatch()">
 
         <label for="albumInput">End of album:</label>
-        <input id="albumInput" placeholder="0" oninput="updateAlbum()">
+        <input id="myInput" placeholder="0" oninput="updateAlbum()">
     </section>
 
     <!-- POST SECTION -->
     <section class="glass copyDiv" onclick="copyText(this)">
         <p>
             📷 <b>𝗧𝗮𝗸𝘁𝗮𝗸 𝗥𝗼𝗮𝗱, 𝗔𝗻𝘁𝗶𝗽𝗼𝗹𝗼 𝗖𝗶𝘁𝘆</b><br>
-            🖼️ <b>𝗕𝗮𝘁𝗰𝗵 <span id="batchNumber"class="bold-output"></span> 𝗼𝗳 <span id="album" class="bold-output"></span></b><br>
+            🖼️ <b>𝗕𝗮𝘁𝗰𝗵 <span id="output"></span> 𝗼𝗳 <span id="output" class="bold-output"></span></b><br>
             🗓️ <b>𝗗𝗮𝘁𝗲:</b> <span class="date"></span><br>
             ---<br>
             🤝 Special Thanks To:
@@ -309,12 +309,18 @@ window.onload = function() {
     let savedLink = localStorage.getItem("savedLink");
     if(savedLink){document.getElementById("linkInput").value=savedLink; updateLink();}
 };
+    
+const input = document.getElementById('myInput');
+const output = document.getElementById('output');
 
-document.getElementById("batchNumber").textContent = input || "123";
-document.getElementById("album").textContent = input || "1";    
+input.addEventListener('input', () => {
+  output.textContent = input.value;   // Set output text
+  output.style.fontWeight = 'bold';   // Make it bold automatically
+});  
 </script>
 </body>
 </html>
+
 
 
 

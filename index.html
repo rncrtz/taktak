@@ -6,7 +6,7 @@
 <title>Taktak Captions</title>
 
 <!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
 <!-- Main CSS -->
 <link rel="stylesheet" href="style.css">
@@ -14,7 +14,7 @@
 <style>
 /* GENERAL BODY STYLING */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     margin: 20px;
     background: linear-gradient(135deg, #ff1e56 0%, #f9c942 50%, #1e90ff 100%);
     background-attachment: fixed;
@@ -52,8 +52,7 @@ body {
 
 /* INPUTS */
 input, button {
-    font-family: Arial, sans-serif;
-    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
     padding: 8px 12px;
     border-radius: 6px;
     border: 1px solid rgba(255,255,255,0.3);
@@ -112,14 +111,6 @@ p {
     gap: 10px;
 }
 
-.bold-output {
-    font-weight: bold;   /* Makes text bold */
-    color: #000;         /* Optional: visible color */
-}
-
-#batchNumber, #album {
-    font-weight: bold;  /* Make input text appear bold in the post section */
-}    
 </style>
 </head>
 <body>
@@ -181,23 +172,22 @@ p {
 
     <!-- BATCH & ALBUM -->
     <section class="glass">
-        <label for="input1">Batch Number:</label>
-        <input type="text" id="input1" placeholder="Type here...">
+        <label for="batchInput">Batch Number:</label>
+        <input id="batchInput" placeholder="0" oninput="updateBatch()">
 
-        <label for="input2">End of album:</label>
-        <input type="text" id="input2" placeholder="Type here...">
+        <label for="albumInput">End of album:</label>
+        <input id="albumInput" placeholder="0" oninput="updateAlbum()">
     </section>
 
     <!-- POST SECTION -->
     <section class="glass copyDiv" onclick="copyText(this)">
         <p>
             📷 <b>𝗧𝗮𝗸𝘁𝗮𝗸 𝗥𝗼𝗮𝗱, 𝗔𝗻𝘁𝗶𝗽𝗼𝗹𝗼 𝗖𝗶𝘁𝘆</b><br>
-            🖼️ <b>𝗕𝗮𝘁𝗰𝗵 <span id="output1"></span> 𝗼𝗳 <span id="output2"></span></b><br>
-            🗓️ <b>𝗗𝗮𝘁𝗲:</b> <span class="date"></span><br>
+            🖼️ <b>𝗕𝗮𝘁𝗰𝗵 </b><span id="batchNumber">12345678901</span> <b>𝗼𝗳 </b><span id="album">𝟭</span><br>
+            🗓️ <b>𝗗𝗮𝘁𝗲:</b> <span class="date">Saturday, March 8, 2025</span><br>
             ---<br>
-            🤝 Special Thanks To:
-            <div id="specialThanksList"></div>
-            ---<br>
+            🤝 Special Thanks To:<br>
+            <div id="specialThanksList"></div><br>
             📣 Promote With Us:<br>
             Advertise your biz through my photos.<br>
             📩 DM for rates and inquiries.<br>
@@ -207,11 +197,10 @@ p {
             🖼️ Photo Sintra A4 – ₱200<br>
             ---<br>
             📷 Photographer Attendance for Today:<br>
-            🔗 <a id="flickersLink" href="">Click to view album</a>
+            🔗 <a id="flickersLink" href="">Click to view album</a><br>
             ---<br>
             🏷️ Tags:<br>
-            #taktakpitik #taktakalleypodium #taktakfoodpark #pinagmisahan #daangbakal #bigotecafe #rcshots<br>
-            <br>
+            #taktakpitik #taktakalleypodium #taktakfoodpark #pinagmisahan #daangbakal #bigotecafe #rcshots<br><br>
             ❤️ Send Your Appreciation: 0916-503-9113
         </p>
     </section>
@@ -309,36 +298,8 @@ window.onload = function() {
     let savedLink = localStorage.getItem("savedLink");
     if(savedLink){document.getElementById("linkInput").value=savedLink; updateLink();}
 };
-    
-// Function to make output bold
-function makeBold(inputId, outputId) {
-  const input = document.getElementById(inputId);
-  const output = document.getElementById(outputId);
-
-  input.addEventListener('input', () => {
-    output.textContent = input.value;
-    output.style.fontWeight = 'bold';
-  });
-}
-
-// Apply to multiple inputs
-makeBold('input1', 'output1');
-makeBold('input2', 'output2');
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

@@ -309,9 +309,13 @@ window.onload = function() {
     let savedLink = localStorage.getItem("savedLink");
     if(savedLink){document.getElementById("linkInput").value=savedLink; updateLink();}
 };
+
+document.getElementById("batchNumber").textContent = input || "123";
+document.getElementById("album").textContent = input || "1";    
 </script>
 </body>
 </html>
+
 
 
 

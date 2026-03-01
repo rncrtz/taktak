@@ -116,7 +116,10 @@ p {
     font-weight: bold;   /* Makes text bold */
     color: #000;         /* Optional: visible color */
 }
-    
+
+#batchNumber, #album {
+    font-weight: bold;  /* Make input text appear bold in the post section */
+}    
 </style>
 </head>
 <body>
@@ -189,7 +192,7 @@ p {
     <section class="glass copyDiv" onclick="copyText(this)">
         <p>
             📷 <b>𝗧𝗮𝗸𝘁𝗮𝗸 𝗥𝗼𝗮𝗱, 𝗔𝗻𝘁𝗶𝗽𝗼𝗹𝗼 𝗖𝗶𝘁𝘆</b><br>
-            🖼️ <b>𝗕𝗮𝘁𝗰𝗵 <span id="batchNumber"></span> 𝗼𝗳 <span id="album"></span></b><br>
+            🖼️ <b>𝗕𝗮𝘁𝗰𝗵 <span id="batchNumber"class="bold-output"></span> 𝗼𝗳 <span id="album" class="bold-output"></span></b><br>
             🗓️ <b>𝗗𝗮𝘁𝗲:</b> <span class="date"></span><br>
             ---<br>
             🤝 Special Thanks To:
@@ -309,6 +312,7 @@ window.onload = function() {
 </script>
 </body>
 </html>
+
 
 
 

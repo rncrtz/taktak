@@ -37,8 +37,9 @@
         }
 
 		.Div {
-        	display: inline-block;
-			margin: auto;
+        	display: block;
+			width: 100%;
+			margin: 10px auto;
 			border-radius: 10px; /* Adjust the roundness */
     		padding: 10px; /* Space inside */
 			margin-bottom: 10px;
@@ -65,25 +66,21 @@
     		box-shadow: 0 4px 30px rgba(0,0,0,0.1); /* Optional soft shadow */
 		}
 
-		.spotify-floating {
-    		position: fixed;           /* Stick to screen */
-    		bottom: 20px;              /* 20px from bottom */
-    		right: 20px;               /* 20px from right */
-    		width: 500px;              /* Set your desired width */
-    		height: 152px;              /* Spotify mini player height */
-    		border-radius: 12px;       /* Rounded corners */
-    		box-shadow: 0 4px 15px rgba(0,0,0,0.3);  /* Optional shadow */
-    		z-index: 9999;             /* Always on top */
-		}
-
 		.Div:hover,
 		.copyDiv:hover {
     		backdrop-filter: blur(15px); /* More blur on hover */
     		box-shadow: 0 10px 30px rgba(0,0,0,0.4); /* Deeper shadow */
     		transition: all 0.3s ease;
 		}
-		
-    </style>
+
+		.full-input {
+    		width: 100%;
+    		padding: 8px;
+    		border-radius: 6px;
+    		border: none;
+    		outline: none;
+		}
+</style>
 
 <script>
 document.addEventListener("copy", function (event) {
@@ -117,7 +114,7 @@ document.addEventListener("copy", function (event) {
 </head>
 <body>
 	
-<!-- SPOTIFY MUSIC PLAYER -->
+<!-- SPOTIFY MUSIC PLAYER 
 <iframe class="spotify-floating" 
         data-testid="embed-iframe" 
         style="border-radius:12px" 
@@ -126,7 +123,7 @@ document.addEventListener("copy", function (event) {
         allowfullscreen="" 
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
         loading="lazy">
-</iframe>
+</iframe> -->
 	
 <div class="container">
 	
@@ -238,9 +235,9 @@ document.addEventListener("copy", function (event) {
 <div class="Div">
     <label for="thanksInput">Special Thanks To (separate with comma):</label><br>
     <input type="text" id="thanksInput" 
-           placeholder="@Bigote.Cafe,@AnotherPage"
-           oninput="updateSpecialThanks()"
-           style="width:100%; padding:5px;">
+       placeholder="@Bigote.Cafe,@AnotherPage"
+       oninput="updateSpecialThanks()"
+       class="full-input">
 </div>
 	
 </div>
@@ -404,6 +401,7 @@ function loadSpecialThanks() {
 	
 </body>
 </html>
+
 
 
 

@@ -305,27 +305,10 @@ window.onload = function() {
     let savedLink = localStorage.getItem("savedLink");
     if(savedLink){document.getElementById("linkInput").value=savedLink; updateLink();}
 };
-
-document.getElementById("batchInput").addEventListener("input", function() {
-    document.getElementById("batchNumber").textContent = this.value || "12345678901";
-});
-
-function makeInputBold(inputId, outputId, defaultValue) {
-    const input = document.getElementById(inputId);
-    const output = document.getElementById(outputId);
-
-    input.addEventListener("input", () => {
-        output.textContent = input.value || defaultValue;
-        output.style.fontWeight = "bold"; // ensures bold
-    });
-}
-
-// Example:
-makeInputBold("batchInput", "batchNumber", "12345678901");
-makeInputBold("albumInput", "album", "1");    
 </script>
 </body>
 </html>
+
 
 
 

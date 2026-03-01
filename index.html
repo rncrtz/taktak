@@ -74,10 +74,11 @@
 		}
 
 		.thanks-input {
-    		width: 100%;
+    		width: 250px; /* You control size */
+			max-width: 100%; 
     		box-sizing: border-box;  /* 👈 IMPORTANT */
     		padding: 6px;
-    		border-radius: 6px;
+    		border-radius: 5px;
     		border: none;
 		}
 </style>
@@ -233,11 +234,10 @@ document.addEventListener("copy", function (event) {
 
 <!-- SPECIAL THANKS EDITOR -->
 <div class="Div">
-    <label for="thanksInput">Special Thanks To (separate with comma):</label><br>
-    <input type="text" id="thanksInput" 
+    <label for="thanksInput">Special Thanks To (separate with comma):</label>
+    <input type="text" id="thanksInput" class="full-input" 
        placeholder="@Bigote.Cafe,@AnotherPage"
-       oninput="updateSpecialThanks()"
-       class="full-input">
+       oninput="updateSpecialThanks()">
 </div>
 	
 </div>
@@ -401,6 +401,7 @@ function loadSpecialThanks() {
 	
 </body>
 </html>
+
 
 
 

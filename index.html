@@ -181,18 +181,18 @@ p {
 
     <!-- BATCH & ALBUM -->
     <section class="glass">
-        <label for="batchInput">Batch Number:</label>
-        <input id="myInput" placeholder="0" oninput="updateBatch()">
+        <label for="input1">Batch Number:</label>
+        <input type="text" id="input1" placeholder="Type here...">
 
-        <label for="albumInput">End of album:</label>
-        <input id="myInput" placeholder="0" oninput="updateAlbum()">
+        <label for="input2">End of album:</label>
+        <input type="text" id="input2" placeholder="Type here...">
     </section>
 
     <!-- POST SECTION -->
     <section class="glass copyDiv" onclick="copyText(this)">
         <p>
             📷 <b>𝗧𝗮𝗸𝘁𝗮𝗸 𝗥𝗼𝗮𝗱, 𝗔𝗻𝘁𝗶𝗽𝗼𝗹𝗼 𝗖𝗶𝘁𝘆</b><br>
-            🖼️ <b>𝗕𝗮𝘁𝗰𝗵 <span id="output"></span> 𝗼𝗳 <span id="output" class="bold-output"></span></b><br>
+            🖼️ <b>𝗕𝗮𝘁𝗰𝗵 <span id="output1"></span> 𝗼𝗳 <span id="output2"></span></b><br>
             🗓️ <b>𝗗𝗮𝘁𝗲:</b> <span class="date"></span><br>
             ---<br>
             🤝 Special Thanks To:
@@ -310,16 +310,24 @@ window.onload = function() {
     if(savedLink){document.getElementById("linkInput").value=savedLink; updateLink();}
 };
     
-const input = document.getElementById('myInput');
-const output = document.getElementById('output');
+// Function to make output bold
+function makeBold(inputId, outputId) {
+  const input = document.getElementById(inputId);
+  const output = document.getElementById(outputId);
 
-input.addEventListener('input', () => {
-  output.textContent = input.value;   // Set output text
-  output.style.fontWeight = 'bold';   // Make it bold automatically
-});  
+  input.addEventListener('input', () => {
+    output.textContent = input.value;
+    output.style.fontWeight = 'bold';
+  });
+}
+
+// Apply to multiple inputs
+makeBold('input1', 'output1');
+makeBold('input2', 'output2');
 </script>
 </body>
 </html>
+
 
 
 

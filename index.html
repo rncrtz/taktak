@@ -29,16 +29,16 @@
         .copyDiv {
             cursor: pointer;
             display: inline-block;
-			margin: auto;
+			/* margin: auto; */
             margin-bottom: 10px;
         }
 
 		.Div {
         	display: inline-block;
-			max-width: fit-content;
-			margin: auto;
+			/* max-width: fit-content; */
+			/* margin: auto; */
 			border-radius: 10px; /* Adjust the roundness */
-    		padding: 10px; /* Space inside */
+    		padding: 15px; /* Space inside */
 			margin-bottom: 10px;
 
 			/* Glass Effect */
@@ -48,6 +48,13 @@
 			-webkit-backdrop-filter: blur(10px);   /* Safari support */
 			box-shadow: 0 4px 30px rgba(0,0,0,0.1); /* Optional soft shadow */
         }
+
+		.Div, .copyDiv {
+   		 	max-width: 600px;  /* uniform card width */
+    		margin: 10px auto; /* center with same spacing */
+    		padding: 15px;     /* same padding */
+		}
+		
 	    
 		.album-input {
     		font-weight: bold;
@@ -462,6 +469,7 @@ function loadSpecialThanks() {
 	
 </body>
 </html>
+
 
 
 

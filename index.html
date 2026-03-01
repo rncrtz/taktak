@@ -113,7 +113,6 @@ p {
 
 .bold-output {
     font-weight: bold;   /* Makes text bold */
-    font-size: 1.2em;    /* Optional: bigger for emphasis */
     color: #000;         /* Optional: visible color */
 }
     
@@ -189,8 +188,8 @@ p {
     <section class="glass copyDiv" onclick="copyText(this)">
         <p>
             📷 <b>𝗧𝗮𝗸𝘁𝗮𝗸 𝗥𝗼𝗮𝗱, 𝗔𝗻𝘁𝗶𝗽𝗼𝗹𝗼 𝗖𝗶𝘁𝘆</b><br>
-            🖼️ <b>𝗕𝗮𝘁𝗰𝗵 <span id="batchNumber" class="bold-output">12345678901</span></b> <b>𝗼𝗳 </b><span id="album" class="bold-output">𝟭</span><br>
-            🗓️ <b>𝗗𝗮𝘁𝗲:</b> <span class="date">Saturday, March 8, 2025</span><br>
+            🖼️ <b>𝗕𝗮𝘁𝗰𝗵 <span id="batchNumber"></span> 𝗼𝗳 <span id="album"></span></b><br>
+            🗓️ <b>𝗗𝗮𝘁𝗲:</b> <span class="date"></span><br>
             ---<br>
             🤝 Special Thanks To:
             <div id="specialThanksList"></div>
@@ -327,6 +326,7 @@ makeInputBold("albumInput", "album", "1");
 </script>
 </body>
 </html>
+
 
 
 

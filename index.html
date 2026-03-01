@@ -78,9 +78,38 @@
 			max-width: 100%; 
     		box-sizing: border-box;  /* 👈 IMPORTANT */
     		padding: 6px;
-    		border-radius: 5px;
+    		border-radius: 6px;
     		border: none;
 		}
+
+		.add-btn {
+    		padding: 6px 10px;
+    		border-radius: 6px;
+    		border: none;
+    		cursor: pointer;
+    		background: rgba(255,255,255,0.3);
+		}
+
+		.add-btn:hover {
+    		background: rgba(255,255,255,0.5);
+		}
+
+		.thanks-item {
+    		display: flex;
+    		justify-content: space-between;
+    		align-items: center;
+    		background: rgba(255,255,255,0.2);
+    		padding: 5px 10px;
+    		border-radius: 6px;
+    		margin-bottom: 5px;
+		}
+
+		.remove-btn {
+    		cursor: pointer;
+    		color: red;
+    		font-weight: bold;
+		}
+		
 </style>
 
 <script>
@@ -208,7 +237,7 @@ document.addEventListener("copy", function (event) {
             	---<br>
 		🤝 Special Thanks To:<br>
 		<div id="specialThanksList">
-		⭐ @Bigote.Cafe<br>
+		<br>
 		</div>	
 		<br>
         📣 Promote With Us:<br>
@@ -237,10 +266,14 @@ document.addEventListener("copy", function (event) {
 
 <!-- SPECIAL THANKS EDITOR -->
 <div class="Div">
-    <label for="thanksInput">Special Thanks To (separate with comma):</label>
+    <label for="thanksInput">Special Thanks To:</label><br>
+	
     <input type="text" id="thanksInput" class="full-input" 
-       placeholder="@Bigote.Cafe,@AnotherPage"
-       oninput="updateSpecialThanks()">
+       		placeholder="@Bigote.Cafe">
+	
+	<button onclick="addSpecialThanks()" class="add-btn">Add</button>
+	
+	<div id="thanksManager" style="margin-top:10px;"></div>
 </div>
 	
 </div>
@@ -371,32 +404,60 @@ function loadBatch() {
 }
 	
 // SPECIAL THANKS LIST SCRIPT
-function updateSpecialThanks() {
-    let input = document.getElementById("thanksInput").value;
+let specialThanksArray = [];
 
-    localStorage.setItem("specialThanks", input);
+function addSpecialThanks() {
+    let input = document.getElementById("thanksInput");
+    let value = input.value.trim();
 
-    let container = document.getElementById("specialThanksList");
+    if (value === "") return;
 
-    if (input.trim() === "") {
-        container.innerHTML = "";
-        return;
-    }
+    specialThanksArray.push(value);
+    input.value = "";
 
-    let names = input.split(",");
-    container.innerHTML = "";
+    saveSpecialThanks();
+    renderSpecialThanks();
+}
 
-    names.forEach(name => {
-        container.innerHTML += "⭐ " + name.trim() + "<br>";
+function removeSpecialThanks(index) {
+    specialThanksArray.splice(index, 1);
+    saveSpecialThanks();
+    renderSpecialThanks();
+}
+
+function renderSpecialThanks() {
+    let postContainer = document.getElementById("specialThanksList");
+    let managerContainer = document.getElementById("thanksManager");
+
+    postContainer.innerHTML = "";
+    managerContainer.innerHTML = "";
+
+    specialThanksArray.forEach((name, index) => {
+
+        // POST DISPLAY (Clickable link auto-format)
+        let cleanName = name.replace("@", "");
+        postContainer.innerHTML += 
+            `⭐ <a href="https://instagram.com/${cleanName}" target="_blank">${name}</a><br>`;
+
+        // EDITOR DISPLAY
+        managerContainer.innerHTML += `
+            <div class="thanks-item">
+                <span>${name}</span>
+                <span class="remove-btn" onclick="removeSpecialThanks(${index})">❌</span>
+            </div>
+        `;
     });
 }
 
-// Load saved Special Thanks
+function saveSpecialThanks() {
+    localStorage.setItem("specialThanksList", JSON.stringify(specialThanksArray));
+}
+
 function loadSpecialThanks() {
-    let saved = localStorage.getItem("specialThanks");
-    if (saved !== null) {
-        document.getElementById("thanksInput").value = saved;
-        updateSpecialThanks();
+    let saved = localStorage.getItem("specialThanksList");
+    if (saved) {
+        specialThanksArray = JSON.parse(saved);
+        renderSpecialThanks();
     }
 }
 	
@@ -404,6 +465,7 @@ function loadSpecialThanks() {
 	
 </body>
 </html>
+
 
 
 

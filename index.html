@@ -1,405 +1,255 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taktak Captions</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taktak Captions</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Example for the 'Roboto' font with regular and bold weights -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Link to your own CSS file below this line -->
-    <link rel="stylesheet" href="style.css">
-	
-    <style>
-        body { 
-			/* Font Style */
-			font-family: 'Roboto', sans-serif; margin: 20px;
-			
-			/* Background Style */
-    		background: linear-gradient(135deg,#ff1e56 0%,#f9c942 50%,#1e90ff 100%);
-			background-attachment: fixed;
-		}
-		
-       .container { 
-		 	display: flex; flex-direction: column; /* Stack items top to bottom  */
-	   }
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
-        .date-input { margin-bottom: 20px; }
-		
-        p {
-            margin: 0;
-            padding: 0;
-            text-align: left;
-        }
+<!-- Main CSS -->
+<link rel="stylesheet" href="style.css">
 
-        .copyDiv {
-            cursor: pointer;
-            display: inline-block;
-			margin: auto;
-            margin-bottom: 10px;
-        }
+<style>
+/* GENERAL BODY STYLING */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 20px;
+    background: linear-gradient(135deg, #ff1e56 0%, #f9c942 50%, #1e90ff 100%);
+    background-attachment: fixed;
+    color: #fff;
+}
 
-		.Div {
-        	display: inline-block;
-			max-width: fit-content;
-			margin: auto;
-			border-radius: 10px; /* Adjust the roundness */
-    		padding: 15px; /* Space inside */
-			margin-bottom: 10px;
+/* CONTAINER */
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 
-			/* Glass Effect */
-			background: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
-			border: 1px solid rgba(255, 255, 255, 0.3); /* Soft border */
-			backdrop-filter: blur(10px); /* The frosted glass blur */
-			-webkit-backdrop-filter: blur(10px);   /* Safari support */
-			box-shadow: 0 4px 30px rgba(0,0,0,0.1); /* Optional soft shadow */
-        }
-	    
-		.album-input {
-    		font-weight: bold;
-		}
+/* GLASS EFFECT SECTIONS */
+.glass {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 15px 20px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
 
-		.glass-div {
-    		background: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
-    		border-radius: 10px;                   /* Rounded corners */
-   	 		border: 1px solid rgba(255, 255, 255, 0.3); /* Soft border */
-    		backdrop-filter: blur(10px);           /* The frosted glass blur */
-    		-webkit-backdrop-filter: blur(10px);   /* Safari support */
-    		padding: 10px;                         /* Inner spacing */
-    		box-shadow: 0 4px 30px rgba(0,0,0,0.1); /* Optional soft shadow */
-		}
+.glass:hover {
+    backdrop-filter: blur(15px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
 
-		.Div:hover,
-		.copyDiv:hover {
-    		backdrop-filter: blur(15px); /* More blur on hover */
-    		box-shadow: 0 10px 30px rgba(0,0,0,0.4); /* Deeper shadow */
-    		transition: all 0.3s ease;
-		}
+/* INPUTS */
+input, button {
+    font-family: 'Roboto', sans-serif;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.3);
+    backdrop-filter: blur(5px);
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    margin-top: 6px;
+    transition: all 0.2s ease;
+}
 
-		.thanks-input {
-    		width: 250px; /* You control size */
-			max-width: 100%; 
-    		box-sizing: border-box;  /* 👈 IMPORTANT */
-    		padding: 6px;
-    		border-radius: 6px;
-    		border: none;
-		}
+input:focus, button:focus {
+    outline: none;
+    border-color: #fff;
+    box-shadow: 0 0 5px rgba(255,255,255,0.5);
+}
 
-		.add-btn {
-    		padding: 6px 10px;
-    		border-radius: 6px;
-    		border: none;
-    		cursor: pointer;
-    		background: rgba(255,255,255,0.3);
-		}
+/* BUTTONS */
+button {
+    cursor: pointer;
+    background: rgba(255,255,255,0.3);
+}
 
-		.add-btn:hover {
-    		background: rgba(255,255,255,0.5);
-		}
+button:hover {
+    background: rgba(255,255,255,0.5);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
 
-		.thanks-item {
-    		display: flex;
-    		justify-content: space-between;
-    		align-items: center;
-    		background: rgba(255,255,255,0.2);
-    		padding: 5px 10px;
-    		border-radius: 6px;
-    		margin-bottom: 5px;
-		}
+/* SPECIAL THANKS MANAGER */
+.thanks-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255,255,255,0.2);
+    padding: 5px 10px;
+    border-radius: 6px;
+    margin-bottom: 5px;
+}
 
-		.remove-btn {
-    		cursor: pointer;
-    		color: red;
-    		font-weight: bold;
-		}
+.remove-btn {
+    cursor: pointer;
+    color: red;
+    font-weight: bold;
+}
 
-		input {
-    		background: rgba(255,255,255,0.2);
-   			border: 1px solid rgba(255,255,255,0.3);
-    		border-radius: 8px;
-    		padding: 6px 10px;
-    		color: #808080;
-    		backdrop-filter: blur(5px);
-		}
-		
-		input:focus {
-    		outline: none;
-    		border-color: #ccc;
-		}
+/* TEXT SECTIONS */
+p {
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+}
 
-		button:hover {
-    		background: rgba(255,255,255,0.35);
-    		box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    		transition: all 0.3s ease;
-		}
-		
+/* PHOTO GRID EXAMPLE */
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
 </style>
 </head>
-	
-<body>	
+<body>
+
 <div class="container">
-	
-<!-- CHANGE DATE SECTION -->
-<div class="Div">
+
+    <!-- CHANGE DATE SECTION -->
+    <section class="glass">
         <label for="dateInput">Change Date:</label>
-        <input type="date" id="dateInput" class="date-input" onchange="updateDate()">
-</div>
-	
-<!-- TODAY'S FLICKERS SECTION -->	
-<div class="copyDiv glass-div" onclick="copyText()">
-		<p>
-            	📸 <b>𝗧𝗢𝗗𝗔𝗬'𝗦 𝗙𝗟𝗜𝗖𝗞𝗘𝗥𝗦</b> (PUMITIK) <br>
-           	🗓️ <span class="date">Saturday, March 8, 2025</span>
-			<br><br>
-                📸  <br>
-                📸  <br>
-                📸  <br>
-                📸  <br>
-                📸  <br>
-                📸  <br>
-                📸  <br>
-                📸  <br>
-                📸 tag others..  
-			<br><br>
-            	❤️ Send Appreciation - 09165039113
-		</p>
-</div>
-            
-            	<p>    
-					
-<!-- INFRAME SECTION -->			
-<div class="copyDiv glass-div" onclick="copyText()">	
-		📷 <b>𝗜𝗡𝗙𝗥𝗔𝗠𝗘 :</b> (Tag 'em) 
-			<br><br>
-            	📍 Taktak Road, Antipolo City, Rizal <br>
-            	🗓️ <span class="date">Saturday, March 8, 2025</span> <br><br>
-            	❤️ Send Appreciation - 09165039113
-		</p>
-</div>
+        <input type="date" id="dateInput">
+    </section>
 
-<!-- ALBUM TITLE SECTION -->
-<div class="copyDiv glass-div" onclick="copyText()"><p>
-            <span class="album-date">Month-Day-Year</span> - Taktak Road, Antipolo City</p>
-</div>  
-	
-<!-- DESCRIPTION SECTION -->
-<div class="copyDiv glass-div" onclick="copyText()"><p>
-            Thank you so much for your support! I truly appreciate it. If you haven’t yet,<br>
-	please feel free to like and follow my page to stay updated—it really means a lot. Also,<br> 
-	feel free to share any of the photos! If you'd like to show some extra support,<br>
-	you can send a little something via GCash at 09165039113. Thank you again! 🙏😊</p>
-</div>             	
+    <!-- TODAY'S FLICKERS -->
+    <section class="glass copyDiv" onclick="copyText(this)">
+        <p>
+            📸 <b>𝗧𝗢𝗗𝗔𝗬'𝗦 𝗙𝗟𝗜𝗖𝗞𝗘𝗥𝗦</b> (PUMITIK)<br>
+            🗓️ <span class="date">Saturday, March 8, 2025</span><br><br>
+            <div class="photo-grid">
+                <div>📸</div><div>📸</div><div>📸</div><div>📸</div>
+                <div>📸</div><div>📸</div><div>📸</div><div>📸</div>
+            </div><br>
+            ❤️ Send Appreciation - 09165039113
+        </p>
+    </section>
 
-<!-- FLICKERS LINK SECTION -->
-<div class="Div">
+    <!-- INFRAME SECTION -->
+    <section class="glass copyDiv" onclick="copyText(this)">
+        <p>
+            📷 <b>𝗜𝗡𝗙𝗥𝗔𝗠𝗘 :</b> (Tag 'em)<br>
+            📍 Taktak Road, Antipolo City, Rizal<br>
+            🗓️ <span class="date">Saturday, March 8, 2025</span><br>
+            ❤️ Send Appreciation - 09165039113
+        </p>
+    </section>
+
+    <!-- ALBUM TITLE -->
+    <section class="glass copyDiv" onclick="copyText(this)">
+        <p><span class="album-date">Month-Day-Year</span> - Taktak Road, Antipolo City</p>
+    </section>
+
+    <!-- DESCRIPTION -->
+    <section class="glass copyDiv" onclick="copyText(this)">
+        <p>
+            Thank you so much for your support! I truly appreciate it. If you haven’t yet, feel free to like and follow my page to stay updated—it really means a lot.<br>
+            Also, feel free to share any of the photos! If you'd like to show some extra support, you can send a little something via GCash at 09165039113. Thank you again! 🙏😊
+        </p>
+    </section>
+
+    <!-- FLICKERS LINK -->
+    <section class="glass">
         <label for="linkInput">Flickers Link:</label>
-        <input type="url" id="linkInput" class="link-input" placeholder="Enter new link" oninput="updateLink()">
-</div>
-	
-<!-- NUMBERS SECTION -->
-<div class="Div"><b>𝟭𝟮𝟯𝟰𝟱𝟲𝟳𝟴𝟵𝟬</b></div>
+        <input type="url" id="linkInput" placeholder="Enter new link" oninput="updateLink()">
+    </section>
 
-<!-- BACTH NUMBER SECTION -->	
-<div class="Div">
-    <label for="batchInput">Batch Number:</label>
-    <input id="batchInput" class="album-input" placeholder="0" oninput="updateBatch()">
-</div>
+    <!-- NUMBERS -->
+    <section class="glass">
+        <b>𝟭𝟮𝟯𝟰𝟱𝟲𝟳𝟴𝟵𝟬</b>
+    </section>
 
-<!-- END OF ALBUM SECTION -->
-<div class="Div">
-    <label for="albumInput">End of album:</label>
-    <input id="albumInput" class="album-input" placeholder="0" oninput="updateAlbum()">
-</div>
-					
-<!-- POST SECTION -->
-<div class="copyDiv glass-div" onclick="copyText()"><p>
-		📷 <b>𝗧𝗮𝗸𝘁𝗮𝗸 𝗥𝗼𝗮𝗱, 𝗔𝗻𝘁𝗶𝗽𝗼𝗹𝗼 𝗖𝗶𝘁𝘆</b><br>
-            	🖼️ <b>𝗕𝗮𝘁𝗰𝗵 </b><span id="batchNumber">12345678901</span> <b>𝗼𝗳 </b><span id="album" class="album-input">𝟭</span> (Tap the album to view all)<br>
-            	🗓️ <b>𝗗𝗮𝘁𝗲: </b> <span class="date"> Saturday, March 8, 2025</span><br>
-            	---<br>
-		🤝 Special Thanks To:<br>
-		<div id="specialThanksList">
-		<br>
-		</div>	
-		<br>
-        📣 Promote With Us:<br>
-		Advertise your biz through my photos.<br>
-		📩 DM for rates and inquiries.<br>
-            	---<br>
-		💼 Services Offered:<br>
-		📸 Hi-Res Photo (No Watermark) – ₱50 each<br>
-		🖼️ Photo Sintra A4 – ₱200<br>
-            	---<br>
-		📷 Photographer Attendance for Today:<br>
-		🔗 <a id="flickersLink" href="">Click to view album</a><br>
-            	---<br>
-		🏷️ Tags:<br>
-		#taktakpitik<br>
-		#taktakalleypodium<br>
-		#taktakfoodpark<br>
-		#pinagmisahan<br>
-		#daangbakal<br>
-		#bigotecafe<br>
-		#rcshots<br><br>
+    <!-- BATCH & ALBUM -->
+    <section class="glass">
+        <label for="batchInput">Batch Number:</label>
+        <input id="batchInput" placeholder="0" oninput="updateBatch()">
 
-		❤️ Send Your Appreciation: 0916-503-9113
-		</p>
-</div>			
+        <label for="albumInput">End of album:</label>
+        <input id="albumInput" placeholder="0" oninput="updateAlbum()">
+    </section>
 
-<!-- SPECIAL THANKS EDITOR -->
-<div class="Div">
-    <label for="thanksInput">Special Thanks To:</label><br>
-	
-    <input type="text" id="thanksInput" class="full-input" 
-       		placeholder="@Bigote.Cafe">
-	
-	<button onclick="addSpecialThanks()" class="add-btn">Add</button>
-	
-	<div id="thanksManager" style="margin-top:10px;"></div>
+    <!-- POST SECTION -->
+    <section class="glass copyDiv" onclick="copyText(this)">
+        <p>
+            📷 <b>𝗧𝗮𝗸𝘁𝗮𝗸 𝗥𝗼𝗮𝗱, 𝗔𝗻𝘁𝗶𝗽𝗼𝗹𝗼 𝗖𝗶𝘁𝘆</b><br>
+            🖼️ <b>𝗕𝗮𝘁𝗰𝗵 </b><span id="batchNumber">12345678901</span> <b>𝗼𝗳 </b><span id="album">𝟭</span><br>
+            🗓️ <b>𝗗𝗮𝘁𝗲:</b> <span class="date">Saturday, March 8, 2025</span><br>
+            ---<br>
+            🤝 Special Thanks To:<br>
+            <div id="specialThanksList"></div><br>
+            📣 Promote With Us:<br>
+            Advertise your biz through my photos.<br>
+            📩 DM for rates and inquiries.<br>
+            ---<br>
+            💼 Services Offered:<br>
+            📸 Hi-Res Photo (No Watermark) – ₱50 each<br>
+            🖼️ Photo Sintra A4 – ₱200<br>
+            ---<br>
+            📷 Photographer Attendance for Today:<br>
+            🔗 <a id="flickersLink" href="">Click to view album</a><br>
+            ---<br>
+            🏷️ Tags:<br>
+            #taktakpitik #taktakalleypodium #taktakfoodpark #pinagmisahan #daangbakal #bigotecafe #rcshots<br><br>
+            ❤️ Send Your Appreciation: 0916-503-9113
+        </p>
+    </section>
+
+    <!-- SPECIAL THANKS EDITOR -->
+    <section class="glass">
+        <label for="thanksInput">Special Thanks To:</label>
+        <input type="text" id="thanksInput" placeholder="@Bigote.Cafe">
+        <button onclick="addSpecialThanks()">Add</button>
+        <div id="thanksManager" style="margin-top:10px;"></div>
+    </section>
+
 </div>
-	
-</div>	
-</body>
 
 <script>
-document.addEventListener("copy", function (event) {
-    let selection = window.getSelection();
-    if (!selection.rangeCount) return;
+// COPY FUNCTION
+function copyText(element) {
+    navigator.clipboard.writeText(element.innerText)
+        .then(() => alert("Copied!"))
+        .catch(() => alert("Failed to copy."));
+}
 
-    let div = document.createElement("div");
-    div.appendChild(selection.getRangeAt(0).cloneContents());
-
-    // Function to convert text to Unicode Bold
-    function toUnicodeBold(str) {
-        const normal = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        const bold = "𝗔𝗕𝗖𝗗𝗘𝗙𝗚𝗛𝗜𝗝𝗞𝗟𝗠𝗡𝗢𝗣𝗤𝗥𝗦𝗧𝗨𝗩𝗪𝗫𝗬𝗭𝗮𝗯𝗰𝗱𝗲𝗳𝗴𝗵𝗶𝗷𝗸𝗹𝗺𝗻𝗼𝗽𝗾𝗿𝘀𝘁𝘂𝘃𝘄𝘅𝘆𝘇𝟬𝟭𝟮𝟯𝟰𝟱𝟲𝟕𝟴𝟵";
-        
-        return str.split("").map(char => {
-            let index = normal.indexOf(char);
-            return index !== -1 ? bold[index] : char;
-        }).join("");
-    }
-
-    div.innerHTML = div.innerHTML.replace(/<b>(.*?)<\/b>|<strong>(.*?)<\/strong>/gi, (match, p1, p2) => {
-        return toUnicodeBold(p1 || p2);
-    });
-
-    event.clipboardData.setData("text/plain", div.textContent);
-    event.preventDefault();
-});
-</script>
-
-<script>
-
-// WINDOW LOAD
-window.onload = function() {
-    loadAlbum();
-    loadBatch();
-	loadSpecialThanks();
-};
-	
-document.addEventListener("DOMContentLoaded", function () {
-    // Load saved values on page load
-    const savedDate = localStorage.getItem("savedDate");
-    const savedLink = localStorage.getItem("savedLink");
-
-    if (savedDate) {
-        document.getElementById("dateInput").value = savedDate;
-        updateDate(); // Update displayed date
-    }
-
-    if (savedLink) {
-        document.getElementById("linkInput").value = savedLink;
-        updateLink(); // Update the link
-    }
-});
-
+// DATE UPDATE
 function updateDate() {
     const dateInput = document.getElementById("dateInput").value;
-    if (dateInput) {
-        localStorage.setItem("savedDate", dateInput);
-
-        const date = new Date(dateInput);
-
-        // Full format (with weekday)
-        const fullOptions = { 
-            weekday: "long", 
-            year: "numeric", 
-            month: "long", 
-            day: "numeric" 
-        };
-
-        // Album format (NO weekday)
-        const albumOptions = { 
-            year: "numeric", 
-            month: "long", 
-            day: "numeric" 
-        };
-
-        const fullFormatted = date.toLocaleDateString("en-US", fullOptions);
-        const albumFormatted = date.toLocaleDateString("en-US", albumOptions);
-
-        // Update normal date sections
-        document.querySelectorAll(".date").forEach(el => {
-            el.textContent = fullFormatted;
-        });
-
-        // Update album title date only
-        document.querySelectorAll(".album-date").forEach(el => {
-            el.textContent = albumFormatted;
-        });
-    }
+    if (!dateInput) return;
+    localStorage.setItem("savedDate", dateInput);
+    const date = new Date(dateInput);
+    const fullOptions = { weekday:"long", year:"numeric", month:"long", day:"numeric" };
+    const albumOptions = { year:"numeric", month:"long", day:"numeric" };
+    document.querySelectorAll(".date").forEach(el => el.textContent = date.toLocaleDateString("en-US", fullOptions));
+    document.querySelectorAll(".album-date").forEach(el => el.textContent = date.toLocaleDateString("en-US", albumOptions));
 }
 
+// LINK UPDATE
 function updateLink() {
     const linkInput = document.getElementById("linkInput").value;
-    localStorage.setItem("savedLink", linkInput); // Save to local storage
-
+    localStorage.setItem("savedLink", linkInput);
     const linkElement = document.getElementById("flickersLink");
-    if (linkInput) {
-        linkElement.href = linkInput;
-        linkElement.textContent = linkInput;
-    }
+    linkElement.href = linkInput;
+    linkElement.textContent = linkInput;
 }
 
+// ALBUM & BATCH
 function updateAlbum() {
-	let input = document.getElementById("albumInput").value;
-	document.getElementById("album").textContent = input || "1"; // Default to "1" if input is empty
-    }
-
-// NEW SCRIPT
-	    
-        document.querySelectorAll('.copyDiv').forEach(div => {
-            div.addEventListener('click', async function () {
-                try {
-                    await navigator.clipboard.writeText(this.innerText); // Copies clicked div's text
-                    alert("Copied: " + this.innerText);
-                } catch (err) {
-                    console.error("Failed to copy: ", err);
-                    alert("Failed to copy. Try using HTTPS or a secure browser.");
-                }
-            });
-        });
-</script>
-
-<script>
-        // Function to update the album number and save it to localStorage
-        function updateAlbum() {
-            let input = document.getElementById("albumInput").value;
-            document.getElementById("album").textContent = input || "1"; // Default to "1" if input is empty
-            localStorage.setItem("albumNumber", input); // Save to localStorage
-        }
-
-        // Function to load saved album number when page loads
-        function loadAlbum() {
-            let savedAlbum = localStorage.getItem("albumNumber");
-            if (savedAlbum !== null) {
-                document.getElementById("albumInput").value = savedAlbum;
-                document.getElementById("album").textContent = savedAlbum;
-            }
-        }
+    let input = document.getElementById("albumInput").value;
+    document.getElementById("album").textContent = input || "1";
+    localStorage.setItem("albumNumber", input);
+}
 
 function updateBatch() {
     let input = document.getElementById("batchInput").value;
@@ -407,73 +257,47 @@ function updateBatch() {
     localStorage.setItem("batchNumber", input);
 }
 
-// Load saved batch number
-function loadBatch() {
-    let savedBatch = localStorage.getItem("batchNumber");
-    if (savedBatch !== null) {
-        document.getElementById("batchInput").value = savedBatch;
-        document.getElementById("batchNumber").textContent = savedBatch;
-    }
-}
-	
-// SPECIAL THANKS LIST SCRIPT
+// SPECIAL THANKS LIST
 let specialThanksArray = [];
-
 function addSpecialThanks() {
-    let input = document.getElementById("thanksInput");
-    let value = input.value.trim();
-
-    if (value === "") return;
-
+    let value = document.getElementById("thanksInput").value.trim();
+    if (!value) return;
     specialThanksArray.push(value);
-    input.value = "";
-
+    document.getElementById("thanksInput").value = "";
     saveSpecialThanks();
     renderSpecialThanks();
 }
-
 function removeSpecialThanks(index) {
-    specialThanksArray.splice(index, 1);
+    specialThanksArray.splice(index,1);
     saveSpecialThanks();
     renderSpecialThanks();
 }
-
 function renderSpecialThanks() {
-    let postContainer = document.getElementById("specialThanksList");
-    let managerContainer = document.getElementById("thanksManager");
-
+    const postContainer = document.getElementById("specialThanksList");
+    const managerContainer = document.getElementById("thanksManager");
     postContainer.innerHTML = "";
     managerContainer.innerHTML = "";
-
-    specialThanksArray.forEach((name, index) => {
-
-        // POST DISPLAY (Clickable link auto-format)
-        let cleanName = name.replace("@", "");
-        postContainer.innerHTML += 
-            `⭐ <a href="https://instagram.com/${cleanName}" target="_blank">${name}</a><br>`;
-
-        // EDITOR DISPLAY
-        managerContainer.innerHTML += `
-            <div class="thanks-item">
-                <span>${name}</span>
-                <span class="remove-btn" onclick="removeSpecialThanks(${index})">❌</span>
-            </div>
-        `;
+    specialThanksArray.forEach((name,index)=>{
+        let cleanName = name.replace("@","");
+        postContainer.innerHTML += `⭐ <a href="https://instagram.com/${cleanName}" target="_blank">${name}</a><br>`;
+        managerContainer.innerHTML += `<div class="thanks-item"><span>${name}</span><span class="remove-btn" onclick="removeSpecialThanks(${index})">❌</span></div>`;
     });
 }
+function saveSpecialThanks(){localStorage.setItem("specialThanksList",JSON.stringify(specialThanksArray));}
+function loadSpecialThanks(){let saved = localStorage.getItem("specialThanksList"); if(saved){specialThanksArray=JSON.parse(saved);renderSpecialThanks();}}
 
-function saveSpecialThanks() {
-    localStorage.setItem("specialThanksList", JSON.stringify(specialThanksArray));
-}
-
-function loadSpecialThanks() {
-    let saved = localStorage.getItem("specialThanksList");
-    if (saved) {
-        specialThanksArray = JSON.parse(saved);
-        renderSpecialThanks();
-    }
-}
-	
+// LOAD SAVED DATA
+window.onload = function() {
+    loadSpecialThanks();
+    let savedAlbum = localStorage.getItem("albumNumber");
+    if(savedAlbum!==null){document.getElementById("albumInput").value=savedAlbum; document.getElementById("album").textContent=savedAlbum;}
+    let savedBatch = localStorage.getItem("batchNumber");
+    if(savedBatch!==null){document.getElementById("batchInput").value=savedBatch; document.getElementById("batchNumber").textContent=savedBatch;}
+    let savedDate = localStorage.getItem("savedDate");
+    if(savedDate){document.getElementById("dateInput").value=savedDate; updateDate();}
+    let savedLink = localStorage.getItem("savedLink");
+    if(savedLink){document.getElementById("linkInput").value=savedLink; updateLink();}
+};
 </script>
-	
+</body>
 </html>

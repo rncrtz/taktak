@@ -163,7 +163,11 @@ p {
     <!-- FLICKERS LINK -->
     <section class="glass">
         <label for="linkInput">Flickers Link:</label>
-        <input type="url" id="linkInput" placeholder="Enter new link" oninput="updateLink()">
+
+        <div style="display:flex; gap:8px;">
+            <input type="url" id="linkInput" placeholder="Enter new link" oninput="updateLink()" style="flex:1;">
+            <button onclick="pasteClipboard()">Paste</button>
+        </div>
     </section>
 
     <!-- NUMBERS
@@ -227,6 +231,20 @@ function copyText(element) {
         .catch(() => alert("Failed to copy."));
 }
 
+// PASTE FUNCTION
+async function pasteClipboard() {
+    try {
+        const text = await navigator.clipboard.readText();
+        const input = document.getElementById("linkInput");
+
+        input.value = text;
+        updateLink();
+
+    } catch (err) {
+        alert("Clipboard access denied. Please allow clipboard permission.");
+    }
+}
+    
 // DATE UPDATE
 function updateDate() {
     const dateInput = document.getElementById("dateInput").value;
@@ -305,6 +323,7 @@ window.onload = function() {
 </script>
 </body>
 </html>
+
 
 
 

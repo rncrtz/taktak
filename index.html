@@ -223,7 +223,21 @@ p {
 
 </div>
 
+<audio id="hoverSound" preload="auto">
+    <source src="https://foldr.space/f/lD2aj0wI02oxTg3X/ps4-nav.wav" type="audio/mpeg">
+</audio>
+    
 <script>
+// HOVER SOUND FX   
+const hoverSound = document.getElementById("hoverSound");
+
+document.querySelectorAll(".glass").forEach(div => {
+    div.addEventListener("mouseenter", () => {
+        hoverSound.currentTime = 0;
+        hoverSound.play();
+    });
+});
+    
 // COPY FUNCTION
 function copyText(element) {
     navigator.clipboard.writeText(element.innerText)
@@ -323,6 +337,7 @@ window.onload = function() {
 </script>
 </body>
 </html>
+
 
 
 

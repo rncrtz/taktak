@@ -263,7 +263,7 @@ async function pasteClipboard() {
 function updateDate() {
     const dateInput = document.getElementById("dateInput").value;
     if (!dateInput) return;
-    localStorage.setItem("savedDate", dateInput);
+    
     const date = new Date(dateInput);
     const fullOptions = { weekday:"long", year:"numeric", month:"long", day:"numeric" };
     const albumOptions = { year:"numeric", month:"long", day:"numeric" };
@@ -274,7 +274,7 @@ function updateDate() {
 // LINK UPDATE
 function updateLink() {
     const linkInput = document.getElementById("linkInput").value;
-    localStorage.setItem("savedLink", linkInput);
+    
     const linkElement = document.getElementById("flickersLink");
     linkElement.href = linkInput;
     linkElement.textContent = linkInput;
@@ -284,13 +284,13 @@ function updateLink() {
 function updateAlbum() {
     let input = document.getElementById("albumInput").value;
     document.getElementById("album").textContent = input || "1";
-    localStorage.setItem("albumNumber", input);
+    
 }
 
 function updateBatch() {
     let input = document.getElementById("batchInput").value;
     document.getElementById("batchNumber").textContent = input || "12345678901";
-    localStorage.setItem("batchNumber", input);
+    
 }
 
 // SPECIAL THANKS LIST
@@ -319,8 +319,6 @@ function renderSpecialThanks() {
         managerContainer.innerHTML += `<div class="thanks-item"><span>${name}</span><span class="remove-btn" onclick="removeSpecialThanks(${index})">❌</span></div>`;
     });
 }
-function saveSpecialThanks(){localStorage.setItem("specialThanksList",JSON.stringify(specialThanksArray));}
-function loadSpecialThanks(){let saved = localStorage.getItem("specialThanksList"); if(saved){specialThanksArray=JSON.parse(saved);renderSpecialThanks();}}
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -379,6 +377,7 @@ window.onload = function(){
 </script>
 </body>
 </html>
+
 
 
 

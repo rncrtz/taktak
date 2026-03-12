@@ -263,7 +263,7 @@ async function pasteClipboard() {
 function updateDate() {
     const dateInput = document.getElementById("dateInput").value;
     if (!dateInput) return;
-    
+    localStorage.setItem("savedDate", dateInput);
     const date = new Date(dateInput);
     const fullOptions = { weekday:"long", year:"numeric", month:"long", day:"numeric" };
     const albumOptions = { year:"numeric", month:"long", day:"numeric" };
@@ -274,7 +274,7 @@ function updateDate() {
 // LINK UPDATE
 function updateLink() {
     const linkInput = document.getElementById("linkInput").value;
-    
+    localStorage.setItem("savedLink", linkInput);
     const linkElement = document.getElementById("flickersLink");
     linkElement.href = linkInput;
     linkElement.textContent = linkInput;
@@ -284,13 +284,13 @@ function updateLink() {
 function updateAlbum() {
     let input = document.getElementById("albumInput").value;
     document.getElementById("album").textContent = input || "1";
-    
+    localStorage.setItem("albumNumber", input);
 }
 
 function updateBatch() {
     let input = document.getElementById("batchInput").value;
     document.getElementById("batchNumber").textContent = input || "12345678901";
-    
+    localStorage.setItem("batchNumber", input);
 }
 
 // SPECIAL THANKS LIST
@@ -319,81 +319,22 @@ function renderSpecialThanks() {
         managerContainer.innerHTML += `<div class="thanks-item"><span>${name}</span><span class="remove-btn" onclick="removeSpecialThanks(${index})">❌</span></div>`;
     });
 }
+function saveSpecialThanks(){localStorage.setItem("specialThanksList",JSON.stringify(specialThanksArray));}
+function loadSpecialThanks(){let saved = localStorage.getItem("specialThanksList"); if(saved){specialThanksArray=JSON.parse(saved);renderSpecialThanks();}}
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyC64_qQ1kcREov7FIctNLkjI_CWevh2ufo",
-  authDomain: "rcshots---pitik-caption.firebaseapp.com",
-  projectId: "rcshots---pitik-caption"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-// SAVE DATA ONLINE    
-async function saveOnline() {
-  await setDoc(doc(db, "taktak", "data"), {
-    date: document.getElementById("dateInput").value,
-    link: document.getElementById("linkInput").value,
-    batch: document.getElementById("batchInput").value,
-    album: document.getElementById("albumInput").value,
-    thanks: specialThanksArray
-  });
-}
-
- // LOAD DATA ONLINE   
-async function loadOnline() {
-
-  const docRef = doc(db, "taktak", "data");
-  const docSnap = await getDoc(docRef);
-
-  if (docSnap.exists()) {
-    const data = docSnap.data();
-
-    document.getElementById("dateInput").value = data.date;
-    document.getElementById("linkInput").value = data.link;
-    document.getElementById("batchInput").value = data.batch;
-    document.getElementById("albumInput").value = data.album;
-
-    specialThanksArray = data.thanks || [];
-    renderSpecialThanks();
-
-    updateDate();
-    updateLink();
-    updateBatch();
-    updateAlbum();
-  }
-
-}
-
- // WINDOW ONLOAD
-window.onload = function(){
-   loadOnline();
-}
+// LOAD SAVED DATA
+window.onload = function() {
+    loadSpecialThanks();
+    let savedAlbum = localStorage.getItem("albumNumber");
+    if(savedAlbum!==null){document.getElementById("albumInput").value=savedAlbum; document.getElementById("album").textContent=savedAlbum;}
+    let savedBatch = localStorage.getItem("batchNumber");
+    if(savedBatch!==null){document.getElementById("batchInput").value=savedBatch; document.getElementById("batchNumber").textContent=savedBatch;}
+    let savedDate = localStorage.getItem("savedDate");
+    if(savedDate){document.getElementById("dateInput").value=savedDate; updateDate();}
+    let savedLink = localStorage.getItem("savedLink");
+    if(savedLink){document.getElementById("linkInput").value=savedLink; updateLink();}
+};  
     
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

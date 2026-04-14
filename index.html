@@ -334,7 +334,34 @@ window.onload = function() {
     let savedLink = localStorage.getItem("savedLink");
     if(savedLink){document.getElementById("linkInput").value=savedLink; updateLink();}
 };  
-    
 </script>
+
+<!-- FIREBASE SCRIPT -->
+    
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyC64_qQ1kcREov7FIctNLkjI_CWevh2ufo",
+  authDomain: "rcshots---pitik-caption.firebaseapp.com",
+  projectId: "rcshots---pitik-caption",
+  storageBucket: "rcshots---pitik-caption.firebasestorage.app",
+  messagingSenderId: "724627947169",
+  appId: "1:724627947169:web:1e4f57930e3005fcc53ae0",
+  measurementId: "G-MB90SF0768"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+console.log("Firebase connected!");
+</script>   
+    
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js"></script>  
+    
 </body>
 </html>

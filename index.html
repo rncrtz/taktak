@@ -111,8 +111,16 @@ p {
     gap: 10px;
 }
 
+#batchButtons button.active {
+    background: rgba(255,255,255,0.8);
+    font-weight: bold;
+    transform: scale(1.05);
+}
+    
 </style>
 </head>
+
+    
 <body>
 
 <div class="container">
@@ -257,9 +265,14 @@ p {
 <audio id="hoverSound" preload="auto">
     <source src="https://foldr.space/d/ps4-nav.wav" type="audio/wav">
 </audio>
+
+<!----------------- JAVA SCRIPT -------------------->
     
 <script>
-// HOVER SOUND FX   
+// =========================
+// HOVER SOUND
+// =========================
+
 const hoverSound = document.getElementById("hoverSound");
 
 document.querySelectorAll(".glass").forEach(div => {
@@ -268,58 +281,90 @@ document.querySelectorAll(".glass").forEach(div => {
         hoverSound.play();
     });
 });
-    
-// COPY FUNCTION
+
+// =========================
+// COPY TEXT
+// =========================
+
 function copyText(element) {
     navigator.clipboard.writeText(element.innerText)
         .then(() => alert("Copied!"))
         .catch(() => alert("Failed to copy."));
 }
 
-// PASTE FUNCTION
+// =========================
+// PASTE CLIPBOARD
+// =========================
+
 async function pasteClipboard() {
     try {
         const text = await navigator.clipboard.readText();
-        const input = document.getElementById("linkInput");
-
-        input.value = text;
+        document.getElementById("linkInput").value = text;
         updateLink();
-
     } catch (err) {
-        alert("Clipboard access denied. Please allow clipboard permission.");
+        alert("Clipboard access denied.");
     }
 }
-    
-// DATE UPDATE
+
+// =========================
+// DATE
+// =========================
+
 function updateDate() {
     const dateInput = document.getElementById("dateInput").value;
+
     if (!dateInput) return;
+
     localStorage.setItem("savedDate", dateInput);
+
     const date = new Date(dateInput);
-    const fullOptions = { weekday:"long", year:"numeric", month:"long", day:"numeric" };
-    const albumOptions = { year:"numeric", month:"long", day:"numeric" };
-    document.querySelectorAll(".date").forEach(el => el.textContent = date.toLocaleDateString("en-US", fullOptions));
-    document.querySelectorAll(".album-date").forEach(el => el.textContent = date.toLocaleDateString("en-US", albumOptions));
-    // ✅ NEW: All Photos section
-    document.querySelectorAll(".allphotos-date").forEach(el =>
-        el.textContent = date.toLocaleDateString("en-US", albumOptions)
-    );
+
+    const fullOptions = {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+    };
+
+    const albumOptions = {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+    };
+
+    document.querySelectorAll(".date").forEach(el => {
+        el.textContent = date.toLocaleDateString("en-US", fullOptions);
+    });
+
+    document.querySelectorAll(".album-date").forEach(el => {
+        el.textContent = date.toLocaleDateString("en-US", albumOptions);
+    });
+
+    document.querySelectorAll(".allphotos-date").forEach(el => {
+        el.textContent = date.toLocaleDateString("en-US", albumOptions);
+    });
 }
 
-// LINK UPDATE
+// =========================
+// FLICKERS LINK
+// =========================
+
 function updateLink() {
-    const linkInput = document.getElementById("linkInput").value;
-    localStorage.setItem("savedLink", linkInput);
+    const link = document.getElementById("linkInput").value;
+
+    localStorage.setItem("savedLink", link);
+
     const linkElement = document.getElementById("flickersLink");
-    linkElement.href = linkInput;
-    linkElement.textContent = linkInput;
+
+    linkElement.href = link;
+    linkElement.textContent = link;
 }
 
-// ALBUM & BATCH
+// =========================
+// QUICK BATCH SELECTOR
+// =========================
 
-// SET BACTH NUMBER
-
-    function setBatch(batchNumber, albumNumber) {
+function setBatch(batchNumber, albumNumber) {
 
     document.getElementById("batchNumber").textContent = batchNumber;
     document.getElementById("album").textContent = albumNumber;
@@ -327,42 +372,9 @@ function updateLink() {
     localStorage.setItem("batchNumber", batchNumber);
     localStorage.setItem("albumNumber", albumNumber);
 }
-    
-// BUTTON
-    
-    
-// SPECIAL THANKS LIST
-let specialThanksArray = [];
-function addSpecialThanks() {
-    let value = document.getElementById("thanksInput").value.trim();
-    if (!value) return;
-    specialThanksArray.push(value);
-    document.getElementById("thanksInput").value = "";
-    saveSpecialThanks();
-    renderSpecialThanks();
-}
-function removeSpecialThanks(index) {
-    specialThanksArray.splice(index,1);
-    saveSpecialThanks();
-    renderSpecialThanks();
-}
-function renderSpecialThanks() {
-    const postContainer = document.getElementById("specialThanksList");
-    const managerContainer = document.getElementById("thanksManager");
-    postContainer.innerHTML = "";
-    managerContainer.innerHTML = "";
-    specialThanksArray.forEach((name,index)=>{
-        let cleanName = name.replace("@","");
-        postContainer.innerHTML += `⭐ <a href="https://instagram.com/${cleanName}" target="_blank">${name}</a><br>`;
-        managerContainer.innerHTML += `<div class="thanks-item"><span>${name}</span><span class="remove-btn" onclick="removeSpecialThanks(${index})">❌</span></div>`;
-    });
-}
-function saveSpecialThanks(){localStorage.setItem("specialThanksList",JSON.stringify(specialThanksArray));}
-function loadSpecialThanks(){let saved = localStorage.getItem("specialThanksList"); if(saved){specialThanksArray=JSON.parse(saved);renderSpecialThanks();}}
 
-// CREATE BATCH BUTTONS
-    
 function createBatchButtons() {
+
     const container = document.getElementById("batchButtons");
 
     container.innerHTML = "";
@@ -370,9 +382,16 @@ function createBatchButtons() {
     for (let i = 1; i <= 20; i++) {
 
         const btn = document.createElement("button");
+
         btn.textContent = i;
 
-        btn.onclick = function() {
+        btn.onclick = function () {
+
+            document
+                .querySelectorAll("#batchButtons button")
+                .forEach(b => b.classList.remove("active"));
+
+            btn.classList.add("active");
 
             let batchNumber = "";
 
@@ -387,24 +406,128 @@ function createBatchButtons() {
     }
 }
 
-    
-// LOAD SAVED DATA
-window.onload = function() {
+// =========================
+// SPECIAL THANKS
+// =========================
+
+let specialThanksArray = [];
+
+function addSpecialThanks() {
+
+    const value =
+        document.getElementById("thanksInput").value.trim();
+
+    if (!value) return;
+
+    specialThanksArray.push(value);
+
+    document.getElementById("thanksInput").value = "";
+
+    saveSpecialThanks();
+    renderSpecialThanks();
+}
+
+function removeSpecialThanks(index) {
+
+    specialThanksArray.splice(index, 1);
+
+    saveSpecialThanks();
+    renderSpecialThanks();
+}
+
+function renderSpecialThanks() {
+
+    const postContainer =
+        document.getElementById("specialThanksList");
+
+    const managerContainer =
+        document.getElementById("thanksManager");
+
+    postContainer.innerHTML = "";
+    managerContainer.innerHTML = "";
+
+    specialThanksArray.forEach((name, index) => {
+
+        const cleanName = name.replace("@", "");
+
+        postContainer.innerHTML +=
+            `⭐ <a href="https://instagram.com/${cleanName}" target="_blank">${name}</a><br>`;
+
+        managerContainer.innerHTML += `
+            <div class="thanks-item">
+                <span>${name}</span>
+                <span class="remove-btn"
+                      onclick="removeSpecialThanks(${index})">
+                      ❌
+                </span>
+            </div>`;
+    });
+}
+
+function saveSpecialThanks() {
+    localStorage.setItem(
+        "specialThanksList",
+        JSON.stringify(specialThanksArray)
+    );
+}
+
+function loadSpecialThanks() {
+
+    const saved =
+        localStorage.getItem("specialThanksList");
+
+    if (!saved) return;
+
+    specialThanksArray = JSON.parse(saved);
+
+    renderSpecialThanks();
+}
+
+// =========================
+// PAGE LOAD
+// =========================
+
+window.onload = function () {
+
     createBatchButtons();
     loadSpecialThanks();
-    let savedAlbum = localStorage.getItem("albumNumber");
-    if(savedAlbum!==null){
-        document.getElementById("album").textContent=savedAlbum;
+
+    const savedBatch =
+        localStorage.getItem("batchNumber");
+
+    if (savedBatch) {
+        document.getElementById("batchNumber").textContent =
+            savedBatch;
     }
-    let savedBatch = localStorage.getItem("batchNumber");
-    if(savedBatch!==null){
-    document.getElementById("batchNumber").textContent = savedBatch;
-}
-    let savedDate = localStorage.getItem("savedDate");
-    if(savedDate){document.getElementById("dateInput").value=savedDate; updateDate();}
-    let savedLink = localStorage.getItem("savedLink");
-    if(savedLink){document.getElementById("linkInput").value=savedLink; updateLink();}
-};  
+
+    const savedAlbum =
+        localStorage.getItem("albumNumber");
+
+    if (savedAlbum) {
+        document.getElementById("album").textContent =
+            savedAlbum;
+    }
+
+    const savedDate =
+        localStorage.getItem("savedDate");
+
+    if (savedDate) {
+        document.getElementById("dateInput").value =
+            savedDate;
+
+        updateDate();
+    }
+
+    const savedLink =
+        localStorage.getItem("savedLink");
+
+    if (savedLink) {
+        document.getElementById("linkInput").value =
+            savedLink;
+
+        updateLink();
+    }
+}; 
 </script>
 
 <!-- FIREBASE SCRIPT -->

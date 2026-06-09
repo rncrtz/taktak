@@ -133,6 +133,26 @@ p {
     font-weight: bold;
     transform: scale(1.05);
 }
+
+.photographer-btn {
+    text-align:left;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.15);
+    border-radius:12px;
+}
+
+.photographer-btn.active {
+    background:rgba(0,255,120,0.15);
+    border-color:rgba(0,255,120,0.4);
+}
+
+.photographer-btn.active::before {
+    content:"✅ ";
+}
+
+.photographer-btn:not(.active)::before {
+    content:"📸 ";
+}
     
 </style>
 </head>
@@ -148,15 +168,28 @@ p {
             📸 <b>𝗧𝗢𝗗𝗔𝗬'𝗦 𝗣𝗛𝗢𝗧𝗢𝗚𝗥𝗔𝗣𝗛𝗘𝗥𝗦</b><br>
             📍 Taktak Road, Antipolo City, Rizal<br>
             🗓️ <span class="date">Saturday, March 8, 2025</span><br>
-            <div class="photo-grid">
-                <div>📸</div><div>📸</div><div>📸</div><div>📸</div>
-                <div>📸</div><div>📸</div><div>📸</div><div>📸</div>
-                <div>📸 tag others..</div>
+            <div id="photographerGrid" class="photo-grid">
+            <div>📸 tag others..</div>
             </div><br>
             ❤️ Send Appreciation - 09165039113<br><br>
             📹 For sports event coverage, message us on Facebook at fb.com/storiesofenduranceph.<br><br>
             @topfans @followers
         </p>
+    </section>
+
+    <section class="glass">
+    <label><b>Today's Photographers</b></label>
+
+    <div style="display:flex;gap:8px;margin:10px 0;">
+        <button onclick="selectAllPhotographers()">Select All</button>
+        <button onclick="clearAllPhotographers()">Clear All</button>
+    </div>
+
+    <div id="photographerButtons" style="
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:8px;">
+    </div>
     </section>
 
     <!-- INFRAME SECTION -->
@@ -447,6 +480,134 @@ function loadSpecialThanks() {
     renderSpecialThanks();
 }
 
+
+// =========================
+// PHOTOGRAPHERS
+// =========================
+
+const photographers = [
+    "RC Shots",
+    "Ron",
+    "Mark",
+    "Bryan",
+    "Jerome",
+    "John",
+    "Paolo",
+    "Mike"
+];
+
+let selectedPhotographers = [];
+
+function createPhotographerButtons() {
+
+    const container =
+        document.getElementById("photographerButtons");
+
+    container.innerHTML = "";
+
+    photographers.forEach(name => {
+
+        const btn = document.createElement("button");
+
+        btn.textContent = name;
+        btn.classList.add("photographer-btn");
+
+        if (selectedPhotographers.includes(name)) {
+            btn.classList.add("active");
+        }
+
+        btn.onclick = () => {
+
+            if (selectedPhotographers.includes(name)) {
+
+                selectedPhotographers =
+                    selectedPhotographers.filter(
+                        p => p !== name
+                    );
+
+                btn.classList.remove("active");
+
+            } else {
+
+                selectedPhotographers.push(name);
+
+                btn.classList.add("active");
+            }
+
+            savePhotographers();
+            renderPhotographers();
+        };
+
+        container.appendChild(btn);
+    });
+}
+
+function renderPhotographers() {
+
+    const grid =
+        document.getElementById("photographerGrid");
+
+    grid.innerHTML = "";
+
+    selectedPhotographers.forEach(name => {
+
+        const div =
+            document.createElement("div");
+
+        div.textContent = `📸 ${name}`;
+
+        grid.appendChild(div);
+    });
+
+    const others =
+        document.createElement("div");
+
+    others.textContent = "📸 tag others..";
+
+    grid.appendChild(others);
+}
+
+function savePhotographers() {
+
+    localStorage.setItem(
+        "selectedPhotographers",
+        JSON.stringify(selectedPhotographers)
+    );
+}
+
+function loadPhotographers() {
+
+    const saved =
+        localStorage.getItem(
+            "selectedPhotographers"
+        );
+
+    if (!saved) return;
+
+    selectedPhotographers =
+        JSON.parse(saved);
+}
+
+function selectAllPhotographers() {
+
+    selectedPhotographers =
+        [...photographers];
+
+    savePhotographers();
+    createPhotographerButtons();
+    renderPhotographers();
+}
+
+function clearAllPhotographers() {
+
+    selectedPhotographers = [];
+
+    savePhotographers();
+    createPhotographerButtons();
+    renderPhotographers();
+}
+    
+    
 // =========================
 // PAGE LOAD
 // =========================
@@ -456,6 +617,9 @@ window.onload = function () {
     createBatchButtons();
     loadSpecialThanks();
     updateDate();
+    loadPhotographers();
+    createPhotographerButtons();
+    renderPhotographers();
     
     const savedBatch =
         localStorage.getItem("batchNumber");

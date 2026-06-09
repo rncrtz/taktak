@@ -186,9 +186,6 @@ p {
         <label for="batchInput">Batch Number:</label>
         <input id="batchInput" placeholder="0" oninput="updateBatch()">
 
-        <label for="albumInput">End of album:</label>
-        <input id="albumInput" placeholder="0" oninput="updateAlbum()">
-
 <label><b>𝟭𝟮𝟯𝟰𝟱𝟲𝟳𝟴𝟵𝟬</b></label>
     </section>
 
@@ -315,12 +312,6 @@ function updateLink() {
 }
 
 // ALBUM & BATCH
-function updateAlbum() {
-    let input = document.getElementById("albumInput").value;
-    document.getElementById("album").textContent = input || "1";
-    localStorage.setItem("albumNumber", input);
-}
-
 function updateBatch() {
     let input = document.getElementById("batchInput").value;
 
@@ -329,30 +320,14 @@ function updateBatch() {
 
     localStorage.setItem("batchNumber", input);
 
+    let albumNumber = "1";
+
     if (input.length > 0) {
-        let lastDigit = input.slice(-1);
-
-        // Convert normal digit to bold unicode digit
-        const fancyDigits = {
-            "0":"𝟬",
-            "1":"𝟭",
-            "2":"𝟮",
-            "3":"𝟯",
-            "4":"𝟰",
-            "5":"𝟱",
-            "6":"𝟲",
-            "7":"𝟳",
-            "8":"𝟴",
-            "9":"𝟵"
-        };
-
-        let fancyDigit = fancyDigits[lastDigit] || lastDigit;
-
-        document.getElementById("albumInput").value = fancyDigit;
-        document.getElementById("album").textContent = fancyDigit;
-
-        localStorage.setItem("albumNumber", fancyDigit);
+        albumNumber = input.slice(-1);
     }
+
+    document.getElementById("album").textContent = albumNumber;
+    localStorage.setItem("albumNumber", albumNumber);
 }
 
 // SPECIAL THANKS LIST
@@ -388,7 +363,9 @@ function loadSpecialThanks(){let saved = localStorage.getItem("specialThanksList
 window.onload = function() {
     loadSpecialThanks();
     let savedAlbum = localStorage.getItem("albumNumber");
-    if(savedAlbum!==null){document.getElementById("albumInput").value=savedAlbum; document.getElementById("album").textContent=savedAlbum;}
+    if(savedAlbum!==null){
+        document.getElementById("album").textContent=savedAlbum;
+    }
     let savedBatch = localStorage.getItem("batchNumber");
     if(savedBatch!==null){document.getElementById("batchInput").value=savedBatch; document.getElementById("batchNumber").textContent=savedBatch;}
     let savedDate = localStorage.getItem("savedDate");

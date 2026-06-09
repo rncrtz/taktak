@@ -320,7 +320,7 @@ function updateLink() {
 // SET BACTH NUMBER
 
     function setBatch(batchNumber, albumNumber) {
-    document.getElementById("batchInput").value = batchNumber;
+
     document.getElementById("batchNumber").textContent = batchNumber;
     document.getElementById("album").textContent = albumNumber;
 
@@ -397,7 +397,9 @@ window.onload = function() {
         document.getElementById("album").textContent=savedAlbum;
     }
     let savedBatch = localStorage.getItem("batchNumber");
-    if(savedBatch!==null){document.getElementById("batchInput").value=savedBatch; document.getElementById("batchNumber").textContent=savedBatch;}
+    if(savedBatch!==null){
+    document.getElementById("batchNumber").textContent = savedBatch;
+}
     let savedDate = localStorage.getItem("savedDate");
     if(savedDate){document.getElementById("dateInput").value=savedDate; updateDate();}
     let savedLink = localStorage.getItem("savedLink");

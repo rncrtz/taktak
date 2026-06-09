@@ -490,23 +490,20 @@ window.onload = function () {
             savedAlbum;
     }
 
-    const savedDate =
-        localStorage.getItem("savedDate");
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
 
-    if (savedDate) {
-        document.getElementById("dateInput").value =
-            savedDate;
+    document.getElementById("dateInput").value =
+        `${year}-${month}-${day}`;
 
-        updateDate();
-    }
+    updateDate();
 
-    const savedLink =
-        localStorage.getItem("savedLink");
+    const savedLink = localStorage.getItem("savedLink");
 
     if (savedLink) {
-        document.getElementById("linkInput").value =
-            savedLink;
-
+        document.getElementById("linkInput").value = savedLink;
         updateLink();
     }
 }; 

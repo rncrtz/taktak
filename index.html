@@ -184,11 +184,6 @@ p {
         </div>
     </section>
 
-    <!-- NUMBERS
-    <section class="glass">
-        <b>𝟭𝟮𝟯𝟰𝟱𝟲𝟳𝟴𝟵𝟬</b>
-    </section> -->
-
     <!-- QUICK BATCH SELECTOR -->
     <section class="glass">
         <label><b>Quick Batch Selector</b></label>
@@ -237,7 +232,7 @@ p {
     <!-- SPECIAL THANKS EDITOR -->
     <section class="glass">
         <label for="thanksInput">Special Thanks To:</label>
-        <input type="text" id="thanksInput" placeholder="@Bigote.Cafe">
+        <input type="text" id="thanksInput" placeholder="Add Here">
         <button onclick="addSpecialThanks()">Add</button>
         <div id="thanksManager" style="margin-top:10px;"></div>
     </section>
@@ -269,19 +264,6 @@ p {
 <!----------------- JAVA SCRIPT -------------------->
     
 <script>
-// =========================
-// HOVER SOUND
-// =========================
-
-const hoverSound = document.getElementById("hoverSound");
-
-document.querySelectorAll(".glass").forEach(div => {
-    div.addEventListener("mouseenter", () => {
-        hoverSound.currentTime = 0;
-        hoverSound.play();
-    });
-});
-
 // =========================
 // COPY TEXT
 // =========================

@@ -322,7 +322,14 @@ function updateLink() {
 }
 
 // ALBUM & BATCH
+function updateBatch() {
+    let input = document.getElementById("batchInput").value;
 
+    document.getElementById("batchNumber").textContent =
+        input || "12345678901";
+
+    localStorage.setItem("batchNumber", input);
+}
 // SET BACTH NUMBER
 
     function setBatch(batchNumber, albumNumber) {
@@ -333,7 +340,7 @@ function updateLink() {
     localStorage.setItem("batchNumber", batchNumber);
     localStorage.setItem("albumNumber", albumNumber);
 }
-
+    
 // BUTTON
     
     btn.onclick = function() {

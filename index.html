@@ -125,12 +125,6 @@ p {
 
 <div class="container">
 
-    <!-- CHANGE DATE SECTION -->
-    <section class="glass">
-        <label for="dateInput">Change Date:</label>
-        <input type="date" id="dateInput" onchange="updateDate()">
-    </section>
-
     <!-- TODAY'S FLICKERS -->
     <section class="glass copyDiv" onclick="copyText(this)">
         <p>
@@ -293,13 +287,8 @@ async function pasteClipboard() {
 // =========================
 
 function updateDate() {
-    const dateInput = document.getElementById("dateInput").value;
 
-    if (!dateInput) return;
-
-    localStorage.setItem("savedDate", dateInput);
-
-    const date = new Date(dateInput);
+    const today = new Date();
 
     const fullOptions = {
         weekday: "long",
@@ -315,15 +304,15 @@ function updateDate() {
     };
 
     document.querySelectorAll(".date").forEach(el => {
-        el.textContent = date.toLocaleDateString("en-US", fullOptions);
+        el.textContent = today.toLocaleDateString("en-US", fullOptions);
     });
 
     document.querySelectorAll(".album-date").forEach(el => {
-        el.textContent = date.toLocaleDateString("en-US", albumOptions);
+        el.textContent = today.toLocaleDateString("en-US", albumOptions);
     });
 
     document.querySelectorAll(".allphotos-date").forEach(el => {
-        el.textContent = date.toLocaleDateString("en-US", albumOptions);
+        el.textContent = today.toLocaleDateString("en-US", albumOptions);
     });
 }
 
@@ -473,7 +462,8 @@ window.onload = function () {
 
     createBatchButtons();
     loadSpecialThanks();
-
+    updateDate();
+    
     const savedBatch =
         localStorage.getItem("batchNumber");
 
@@ -489,16 +479,6 @@ window.onload = function () {
         document.getElementById("album").textContent =
             savedAlbum;
     }
-
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, "0");
-    const day = String(today.getDate()).padStart(2, "0");
-
-    document.getElementById("dateInput").value =
-        `${year}-${month}-${day}`;
-
-    updateDate();
 
     const savedLink = localStorage.getItem("savedLink");
 

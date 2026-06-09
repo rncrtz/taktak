@@ -128,7 +128,7 @@ p {
         <p>
             📸 <b>𝗧𝗢𝗗𝗔𝗬'𝗦 𝗣𝗛𝗢𝗧𝗢𝗚𝗥𝗔𝗣𝗛𝗘𝗥𝗦</b><br>
             📍 Taktak Road, Antipolo City, Rizal<br>
-            🗓️ <span class="date">Saturday, March 8, 2025</span><br><br>
+            🗓️ <span class="date">Saturday, March 8, 2025</span><br>
             <div class="photo-grid">
                 <div>📸</div><div>📸</div><div>📸</div><div>📸</div>
                 <div>📸</div><div>📸</div><div>📸</div><div>📸</div>
@@ -143,7 +143,7 @@ p {
     <!-- INFRAME SECTION -->
     <section class="glass copyDiv" onclick="copyText(this)">
         <p>
-            📷 <b>𝗜𝗡 𝗙𝗥𝗔𝗠𝗘 :</b> (Tag 'em)<br>
+            📷 <b>𝗜𝗡 𝗙𝗥𝗔𝗠𝗘 :</b> (Tag 'em)<br><br>
             📍 Taktak Road, Antipolo City, Rizal<br>
             🗓️ <span class="date">Saturday, March 8, 2025</span><br><br>
             ❤️ Send Appreciation - 09165039113<br><br>
@@ -323,8 +323,22 @@ function updateAlbum() {
 
 function updateBatch() {
     let input = document.getElementById("batchInput").value;
-    document.getElementById("batchNumber").textContent = input || "12345678901";
+
+    // Update Batch Number
+    document.getElementById("batchNumber").textContent =
+        input || "12345678901";
+
     localStorage.setItem("batchNumber", input);
+
+    // Auto update End of Album gamit ang huling digit
+    if (input.length > 0) {
+        let lastDigit = input.slice(-1);
+
+        document.getElementById("albumInput").value = lastDigit;
+        document.getElementById("album").textContent = lastDigit;
+
+        localStorage.setItem("albumNumber", lastDigit);
+    }
 }
 
 // SPECIAL THANKS LIST

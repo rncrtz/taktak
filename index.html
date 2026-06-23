@@ -228,6 +228,22 @@ p {
         </div>
     </section>
 
+    <div id="toast" style="
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#28a745;
+    color:white;
+    padding:12px 20px;
+    border-radius:10px;
+    font-weight:bold;
+    opacity:0;
+    transition:opacity .3s ease;
+    z-index:9999;
+">
+    Link Updated!
+</div>
+
     <!-- QUICK BATCH SELECTOR -->
     <section class="glass">
         <label><b>Quick Batch Selector</b></label>
@@ -302,8 +318,12 @@ function copyText(element) {
 async function pasteClipboard() {
     try {
         const text = await navigator.clipboard.readText();
+
         document.getElementById("linkInput").value = text;
+
         updateLink();
+
+        showToast("📋 Link Pasted!");
     } catch (err) {
         alert("Clipboard access denied.");
     }
@@ -348,6 +368,7 @@ function updateDate() {
 // =========================
 
 function updateLink() {
+
     const link = document.getElementById("linkInput").value;
 
     localStorage.setItem("savedLink", link);
@@ -356,6 +377,10 @@ function updateLink() {
 
     linkElement.href = link;
     linkElement.textContent = link;
+
+    if (link.trim() !== "") {
+        showToast("✅ Link Updated!");
+    }
 }
 
 // =========================
@@ -655,6 +680,20 @@ window.onload = function () {
         document.getElementById("linkInput").value = savedLink;
         updateLink();
     }
+
+function showToast(message) {
+
+    const toast = document.getElementById("toast");
+
+    toast.textContent = message;
+    toast.style.opacity = "1";
+
+    setTimeout(() => {
+        toast.style.opacity = "0";
+    }, 2000);
+}
+
+
 }; 
 </script>
 

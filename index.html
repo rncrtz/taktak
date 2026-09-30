@@ -406,13 +406,7 @@ function createBatchButtons() {
 
             btn.classList.add("active");
 
-            let batchNumber = "";
-
-            for (let x = 1; x <= i; x++) {
-                batchNumber += x;
-            }
-
-            setBatch(batchNumber, i);
+            setBatch(i, i);
         };
 
         container.appendChild(btn);
